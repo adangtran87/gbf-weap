@@ -1,0 +1,95 @@
+{
+  "weapon_list": [
+    {
+      "name": "M SR Dagger",
+      "damage": 897,
+      "weapon_type": "magna",
+      "weapon_skill": "medium",
+      "skill_level": 4
+    },
+    {
+      "name": "M SR Axe",
+      "damage": 993,
+      "weapon_type": "magna",
+      "weapon_skill": "medium",
+      "skill_level": 4
+    },
+    {
+      "name": "M SR Dagger",
+      "damage": 673,
+      "weapon_type": "magna",
+      "weapon_skill": "medium",
+      "skill_level": 3
+    },
+    {
+      "name": "M SR Fist",
+      "damage": 1076,
+      "weapon_type": "magna",
+      "weapon_skill": "medium",
+      "skill_level": 3
+    },
+    {
+      "name": "M SR Fist",
+      "damage": 711,
+      "weapon_type": "magna",
+      "weapon_skill": "medium",
+      "skill_level": 3
+    },
+    {
+      "name": "SR Belt",
+      "damage": 1415,
+      "weapon_type": "normal",
+      "weapon_skill": "medium",
+      "skill_level": 2
+    },
+    {
+      "name": "Scarlet Crest Axe",
+      "damage": 1330,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 2
+    },
+    {
+      "name": "Dainslief",
+      "damage": 1277,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Hauteclaire",
+      "damage": 1298,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Lohengrin",
+      "damage": 1312,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Bewitching Bouquet",
+      "damage": 1007,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Azoth",
+      "damage": 1258,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Florenberg",
+      "damage": 2115,
+      "weapon_type": "normal",
+      "weapon_skill": "none",
+      "skill_level": 0
+    }
+  ]
+}
