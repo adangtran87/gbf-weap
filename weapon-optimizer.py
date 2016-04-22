@@ -1,6 +1,8 @@
 import os
 import argparse
 import json
+import copy
+
 from wep_types import WeaponType, SummonType, Weapon, Summon
 from weapon_pool import WeaponPool
 
@@ -58,26 +60,41 @@ class WeaponList:
             else:
                 self.other_list.append(weapon)
 
-    def optimize_weapons(self):
-        #self._sort_weapons()
-        elemental_50 = Summon(SummonType.elemental, .5)
-        elemental_60 = Summon(SummonType.elemental, .6)
-        magna_50 = Summon(SummonType.magna, .5)
-        magna_100 = Summon(SummonType.magna, 1)
+    def optimize_weapon_summon(self, summon1, summon2):
+        # Grab first 10 weapons to start the brute force check
+        # Collect the other weapons into a leftover list
+        start_list = self.weapon_list[:10]
+        leftover_list = self.weapon_list[10:]
 
-        # Get the first 10 weapons as a weapon pool
-        weapon_pool = WeaponPool(self.weapon_list[0:10])
+        #Calc damage with start_list
+        weapon_pool = WeaponPool(start_list)
+        best_damage = weapon_pool.calc_damage(summon1, summon2)
+        best_pool = weapon_pool
 
-        #Calc damage with different summons
-        ele50_ele60 = weapon_pool.calc_damage(elemental_50, elemental_60)
-        ele50_magna50 = weapon_pool.calc_damage(elemental_50, magna_50)
-        ele50_magna100 = weapon_pool.calc_damage(elemental_50, magna_100)
+        # Brute Force!
+        # Replace each weapon in pool with each leftover weapon
+        # If the weapon gets added to the base pool, use that as
+        # the basis for the next pass
+        current_list = copy.deepcopy(start_list)
+        replaced = False
+        for leftover_idx in range(len(leftover_list)):
+            # Use the best pool as the basis for the next iteration
+            if replaced:
+                replaced = False
+                current_list = copy.deepcopy(best_pool.weapon_list)
 
-        print (weapon_pool)
-        print ("Base Damage = {}".format(weapon_pool.base_damage))
-        print ("Elemental 50% + Elemental 60% = {}".format(ele50_ele60))
-        print ("Elemental 50% + Magna 50% = {}".format(ele50_magna50))
-        print ("Elemental 50% + Magna 100% = {}".format(ele50_magna100))
+            #Replace weapon with leftover weapon one by one to best pool
+            for weapon_idx in range(len(current_list)):
+                temp_list = copy.deepcopy(current_list)
+                temp_list[weapon_idx] = leftover_list[leftover_idx]
+                weapon_pool = WeaponPool(temp_list)
+                damage = weapon_pool.calc_damage(summon1, summon2)
+                if (damage > best_damage):
+                    replaced = True
+                    best_damage = damage
+                    best_pool = weapon_pool
+
+        return best_damage, best_pool
 
 def get_args():
     parser = argparse.ArgumentParser()
@@ -86,7 +103,32 @@ def get_args():
 
 if __name__ == "__main__":
     args = get_args()
-    print args.config
+    print ("Parsing: {}".format(args.config))
 
     weapon_list = WeaponList(args.config)
-    weapon_list.optimize_weapons()
+
+    # Create summons I care about right now
+    # Need to figure out best way to let users specify which combinations they care about
+    elemental_50 = Summon(SummonType.elemental, .5)
+    elemental_60 = Summon(SummonType.elemental, .6)
+    magna_50 = Summon(SummonType.magna, .5)
+    magna_100 = Summon(SummonType.magna, 1)
+
+    # Print results!
+    print ("** Elemental 50 - Elemental 60 **")
+    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, elemental_60)
+    print ("Base Damage: {}".format(pool.base_damage))
+    print ("Damage: {}".format(damage))
+    print (pool)
+
+    print ("** Elemental 50 - Magna 50 **")
+    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, magna_50)
+    print ("Base Damage: {}".format(pool.base_damage))
+    print ("Damage: {}".format(damage))
+    print (pool)
+
+    print ("** Elemental 50 - Magna 100 **")
+    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, magna_100)
+    print ("Base Damage: {}".format(pool.base_damage))
+    print ("Damage: {}".format(damage))
+    print (pool)
