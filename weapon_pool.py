@@ -10,7 +10,7 @@ class WeaponPool(object):
 
     # Initialize with a list of 10 weapons
     def __init__(self, weapon_pool):
-        self.weapon_pool = weapon_pool
+        self.weapon_list= weapon_pool
 
         self.normal_list = []
         self.magna_list = []
@@ -42,13 +42,10 @@ class WeaponPool(object):
 
     def __str__(self):
         output = ""
-        output += "Number of weapons: {}\n".format(len(self.weapon_pool))
-        for weapon in self.weapon_pool:
+        output += "Number of weapons: {}\n".format(len(self.weapon_list))
+        for weapon in self.weapon_list:
             output += str(weapon)
-        output += "Normal Modifier: {}\n".format(self.normal_modifier)
-        output += "Magna Modifier: {}\n".format(self.magna_modifier)
-        output += "Unknown Modifier: {}\n".format(self.unknown_modifier)
-        output += "Bahamut Modifier: {}\n".format(self.bahamut_modifier)
+        output += "N:{} M:{} U:{} B:{}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.bahamut_modifier)
         return output
 
     @property
