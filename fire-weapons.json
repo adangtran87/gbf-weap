@@ -90,6 +90,13 @@
       "weapon_type": "normal",
       "weapon_skill": "none",
       "skill_level": 0
+    },
+    {
+      "name": "M SSR Cane",
+      "damage": 929,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 1
     }
   ]
 }
