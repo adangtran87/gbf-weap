@@ -44,7 +44,10 @@ class Weapon(object):
 
     @property
     def multiplier(self):
-        return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+        if self.weapon_skill != WeaponSkill.none:
+            return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+        else:
+            return float(0)
 
 class Summon(object):
     def __init__(self, type, multiplier):
