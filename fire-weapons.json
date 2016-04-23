@@ -2,7 +2,7 @@
   "weapon_list": [
     {
       "name": "M SR Dagger",
-      "damage": 897,
+      "damage": 1121,
       "weapon_type": "magna",
       "weapon_skill": "medium",
       "skill_level": 4
@@ -23,14 +23,14 @@
     },
     {
       "name": "M SR Fist",
-      "damage": 1076,
+      "damage": 1134,
       "weapon_type": "magna",
       "weapon_skill": "medium",
       "skill_level": 3
     },
     {
       "name": "M SR Fist",
-      "damage": 711,
+      "damage": 1003,
       "weapon_type": "magna",
       "weapon_skill": "medium",
       "skill_level": 3
@@ -92,11 +92,11 @@
       "skill_level": 0
     },
     {
-      "name": "M SSR Cane",
-      "damage": 929,
+      "name": "M SSR Staff",
+      "damage": 979,
       "weapon_type": "magna",
       "weapon_skill": "large",
-      "skill_level": 1
+      "skill_level": 2
     }
   ]
 }
