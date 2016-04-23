@@ -2,6 +2,24 @@
 This script tries to find the optimum weapon pool from a list of weapons and
 list of summon pairs. The script optimizes for attack/damage.
 
+#### Weapon Type
+* normal
+* magna
+* unknown
+* bahamut
+
+#### Weapon Skills
+* none
+* small
+* medium
+* large
+
+#### Summon Type
+* elemental
+* magna
+* primal
+* ranko
+* character
 
 ##### Limitations
 * List of weapons and summons must have weapon skills of the same element
@@ -13,7 +31,7 @@ list of summon pairs. The script optimizes for attack/damage.
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
 
-Reference:
+##### References
 [Ajantus's GBF Weapon/Summon Optimization](http://gbf-english.proboards.com/thread/595/#6)
 
 
