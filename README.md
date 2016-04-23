@@ -2,26 +2,27 @@
 This script tries to find the optimum weapon pool from a list of weapons and
 list of summon pairs. The script optimizes for attack/damage.
 
-#### Weapon Type
+#### JSON enum strings
+##### Weapon Type
 * normal
 * magna
 * unknown
 * bahamut
 
-#### Weapon Skills
+##### Weapon Skills
 * none
 * small
 * medium
 * large
 
-#### Summon Type
+##### Summon Type
 * elemental
 * magna
 * primal
 * ranko
 * character
 
-##### Limitations
+#### Limitations
 * List of weapons and summons must have weapon skills of the same element
   * Weapon and summon lists must be in json format
   * Stat sticks should have a skill type of 'none'
@@ -31,7 +32,7 @@ list of summon pairs. The script optimizes for attack/damage.
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
 
-##### References
+#### References
 [Ajantus's GBF Weapon/Summon Optimization](http://gbf-english.proboards.com/thread/595/#6)
 
 
