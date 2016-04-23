@@ -17,6 +17,7 @@ class SummonType(IntEnum):
     magna = 2
     primal = 3
     ranko = 4
+    character = 5
 
 class Weapon(object):
     def __init__(self, **entries):

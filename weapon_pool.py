@@ -73,7 +73,8 @@ class WeaponPool(object):
         summon_mult['magna'] = 1
         summon_mult['primal'] = 1
         summon_mult['ranko'] = 1
-        summon_mult['elemental'] = 1
+        summon_mult['elemental'] = 0
+        summon_mult['character'] = 0
         for summon in summon_list:
             if (summon.type == SummonType.magna):
                 summon_mult['magna'] += summon.multiplier
@@ -83,6 +84,8 @@ class WeaponPool(object):
                 summon_mult['ranko'] += summon.multiplier
             elif (summon.type == SummonType.elemental):
                 summon_mult['elemental'] += summon.multiplier
+            elif (summon.type == SummonType.character):
+                summon_mult['character'] += summon.multiplier
 
         return summon_mult
 
@@ -95,10 +98,11 @@ class WeaponPool(object):
 
         normal_mod = 1 + (self.normal_modifier * summon_mult['primal'])
         normal_mod += self.bahamut_modifier
+        normal_mod += summon_mult['character']
 
         unknown_mod = 1 + (self.unknown_modifier * summon_mult['ranko'])
 
-        elemental_mod = summon_mult['elemental']
+        elemental_mod = 1 + summon_mult['elemental']
 
         #Calculate total damage
         damage = 0
