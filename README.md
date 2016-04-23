@@ -5,4 +5,4 @@
 * enum34
 
 ### How To Run
-`python weapon-optimizer.py -c fire-weapons.json`
+`python weapon-optimizer.py -w fire-weapons.json`

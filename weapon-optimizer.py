@@ -1,90 +1,42 @@
 import os
 import argparse
 import json
-import copy
-import itertools
 
 from wep_types import WeaponType, SummonType, Weapon, Summon
-from weapon_pool import WeaponPool
+from weapon_list import WeaponList
 
-class WeaponList:
-    def __new__(cls, weapon_file):
-        root, ext = os.path.splitext(weapon_file)
-        if ext in file_parsers.keys():
-            return super(Test, cls).__new__(cls)
-        else:
-            raise ValueError("Cannot parse file of {} extension".format(ext))
+def parse_config_file(file_data):
+    root, ext = os.path.splitext(file_data)
+    return FILE_PARSERS[ext](file_data)
 
-    def __init__(self, weapon_file):
-        self.file_parsers = {
-            '.json': self._parse_json,
-        }
+def parse_json(file_data):
+    with open(file_data) as json_data:
+        data_dict = json.load(json_data)
+    return data_dict
 
-        self.weapon_list = []
-        root, ext = os.path.splitext(weapon_file)
-        self.weapon_list = self.file_parsers[ext](weapon_file)
-        return
-
-    def __str__(self):
-        output = ""
-        output += "Number of weapons: {}\n".format(len(self.weapon_list))
-        for weapon in self.weapon_list:
-            output += str(weapon)
-        return output
-
-    def _parse_json(self, weapon_file):
-        weapon_list = []
-        with open(weapon_file) as json_data:
-            weapon_data = json.load(json_data)
-
-        for weapon_entry in weapon_data["weapon_list"]:
-            weapon = Weapon(**weapon_entry)
-            weapon_list.append(weapon)
-        return weapon_list
-
-    def _sort_weapons(self):
-        self.normal_list = []
-        self.magna_list = []
-        self.unknown_list = []
-        self.bahamut_list = []
-        self.other_list = []
-        #Sort weapons
-        for weapon in self.weapon_list:
-            if (weapon.weapon_type == WeaponType.normal):
-                self.normal_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.magna):
-                self.magna_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.unknown):
-                self.unknown_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.bahamut):
-                self.bahamut_list.append(weapon)
-            else:
-                self.other_list.append(weapon)
-
-    def optimize_weapon_summon(self, summon1, summon2):
-        best_damage = 0
-        best_pool = None
-
-        #Brute force all combinations!
-        for weap_comb in itertools.combinations(self.weapon_list, 10):
-            weapon_pool = WeaponPool(weap_comb)
-            damage = weapon_pool.calc_damage(summon1, summon2)
-            if (damage > best_damage):
-                best_damage = damage
-                best_pool = weapon_pool
-
-        return best_damage, best_pool
+FILE_PARSERS = {
+    '.json': parse_json,
+}
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', '-c', help='Path to weapon json file')
+    parser.add_argument('--weapon', '-w', help='Path to weapon json file')
     return parser.parse_args()
+
+def parse_weapon_file(weapon_data):
+    weapon_list = []
+    weapon_data = parse_config_file(weapon_data)
+
+    for weapon_entry in weapon_data["weapon_list"]:
+        weapon = Weapon(**weapon_entry)
+        weapon_list.append(weapon)
+    return WeaponList(weapon_list)
 
 if __name__ == "__main__":
     args = get_args()
-    print ("Parsing: {}".format(args.config))
 
-    weapon_list = WeaponList(args.config)
+    print ("Parsing: {}".format(args.weapon))
+    weapon_list = parse_weapon_file(args.weapon)
 
     # Create summons I care about right now
     # Need to figure out best way to let users specify which combinations they care about
