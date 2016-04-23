@@ -29,10 +29,18 @@ class Weapon(object):
 
     @property
     def multiplier(self):
-        if self.weapon_skill != WeaponSkill.none:
-            return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+        bahamut_multiplier = [
+            0.20, 0.21, 0.22, 0.23, 0.24,
+            0.25, 0.26, 0.27, 0.28, 0.30,
+            0.304, 0.308, 0.312, 0.316, 0.320,
+        ]
+        if self.weapon_type == WeaponType.bahamut:
+            return bahamut_multiplier[self.skill_level - 1]
         else:
-            return float(0)
+            if self.weapon_skill != WeaponSkill.none:
+                return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+            else:
+                return float(0)
 
 class Summon(object):
     def __init__(self, **entries):
