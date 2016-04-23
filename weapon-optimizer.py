@@ -2,6 +2,7 @@ import os
 import argparse
 import json
 import copy
+import itertools
 
 from wep_types import WeaponType, SummonType, Weapon, Summon
 from weapon_pool import WeaponPool
@@ -61,38 +62,16 @@ class WeaponList:
                 self.other_list.append(weapon)
 
     def optimize_weapon_summon(self, summon1, summon2):
-        # Grab first 10 weapons to start the brute force check
-        # Collect the other weapons into a leftover list
-        start_list = self.weapon_list[:10]
-        leftover_list = self.weapon_list[10:]
+        best_damage = 0
+        best_pool = None
 
-        #Calc damage with start_list
-        weapon_pool = WeaponPool(start_list)
-        best_damage = weapon_pool.calc_damage(summon1, summon2)
-        best_pool = weapon_pool
-
-        # Brute Force!
-        # Replace each weapon in pool with each leftover weapon
-        # If the weapon gets added to the base pool, use that as
-        # the basis for the next pass
-        current_list = copy.deepcopy(start_list)
-        replaced = False
-        for leftover_idx in range(len(leftover_list)):
-            # Use the best pool as the basis for the next iteration
-            if replaced:
-                replaced = False
-                current_list = copy.deepcopy(best_pool.weapon_list)
-
-            #Replace weapon with leftover weapon one by one to best pool
-            for weapon_idx in range(len(current_list)):
-                temp_list = copy.deepcopy(current_list)
-                temp_list[weapon_idx] = leftover_list[leftover_idx]
-                weapon_pool = WeaponPool(temp_list)
-                damage = weapon_pool.calc_damage(summon1, summon2)
-                if (damage > best_damage):
-                    replaced = True
-                    best_damage = damage
-                    best_pool = weapon_pool
+        #Brute force all combinations!
+        for weap_comb in itertools.combinations(self.weapon_list, 10):
+            weapon_pool = WeaponPool(weap_comb)
+            damage = weapon_pool.calc_damage(summon1, summon2)
+            if (damage > best_damage):
+                best_damage = damage
+                best_pool = weapon_pool
 
         return best_damage, best_pool
 
