@@ -2,7 +2,7 @@ import os
 import argparse
 import json
 
-from wep_types import WeaponType, SummonType, Weapon, Summon
+from wep_types import WeaponSkill, WeaponType, SummonType, Weapon, Summon
 from weapon_list import WeaponList
 
 def parse_config_file(file_data):
@@ -24,12 +24,28 @@ def get_args():
     return parser.parse_args()
 
 def parse_weapon_file(weapon_data):
+    weapon_type_dict= {
+        'normal': WeaponType.normal,
+        'magna': WeaponType.magna,
+        'unknown': WeaponType.unknown,
+        'bahamut': WeaponType.bahamut,
+    }
+    weapon_skill_dict = {
+        'none': WeaponSkill.none,
+        'small': WeaponSkill.small,
+        'medium': WeaponSkill.medium,
+        'large': WeaponSkill.large,
+    }
     weapon_list = []
     weapon_data = parse_config_file(weapon_data)
 
     for weapon_entry in weapon_data["weapon_list"]:
+        # Replace strings with types
+        weapon_entry['weapon_type'] = weapon_type_dict[weapon_entry['weapon_type']]
+        weapon_entry['weapon_skill'] = weapon_skill_dict[weapon_entry['weapon_skill']]
         weapon = Weapon(**weapon_entry)
         weapon_list.append(weapon)
+
     return WeaponList(weapon_list)
 
 if __name__ == "__main__":

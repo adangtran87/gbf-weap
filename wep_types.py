@@ -23,22 +23,6 @@ class Weapon(object):
     def __init__(self, **entries):
         self.__dict__.update(entries)
 
-        weapon_type_dict= {
-            'normal': WeaponType.normal,
-            'magna': WeaponType.magna,
-            'unknown': WeaponType.unknown,
-            'bahamut': WeaponType.bahamut,
-        }
-        weapon_skill_dict = {
-            'none': WeaponSkill.none,
-            'small': WeaponSkill.small,
-            'medium': WeaponSkill.medium,
-            'large': WeaponSkill.large,
-        }
-
-        self.weapon_type = weapon_type_dict[str(self.weapon_type)]
-        self.weapon_skill = weapon_skill_dict[str(self.weapon_skill)]
-
     def __str__(self):
         output = "{}: {}, {}, {}\n".format(self.name, self.damage, self.weapon_type.name, self.multiplier)
         return output
