@@ -45,7 +45,7 @@ class WeaponPool(object):
         output += "Number of weapons: {}\n".format(len(self.weapon_list))
         for weapon in self.weapon_list:
             output += str(weapon)
-        output += "N:{} M:{} U:{} B:{}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.bahamut_modifier)
+        output += "N:{:.2f} M:{:.2f} U:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.bahamut_modifier)
         return output
 
     @property
