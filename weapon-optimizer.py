@@ -5,6 +5,25 @@ import json
 from wep_types import WeaponSkill, WeaponType, SummonType, Weapon, Summon
 from weapon_list import WeaponList
 from summon_list import SummonList
+
+#------------- Optimization Results -----------------------
+class OptimizationResults:
+    def __init__ (self, damage, pool, summon1, summon2):
+        self.damage = damage
+        self.pool = pool
+        self.my_summon = summon1
+        self.helper_summon = summon2
+
+    @property
+    def results(self):
+        output = ""
+        output += "** {} - {} **\n".format(self.my_summon.name, self.helper_summon.name)
+        output += "Base Damage: {}\n".format(self.pool.base_damage)
+        output += "Damage: {}\n".format(self.damage)
+        output += str(self.pool)
+        return output
+
+#------------- Parsing ------------------------------------
 def parse_config_file(file_data):
     root, ext = os.path.splitext(file_data)
     return FILE_PARSERS[ext](file_data)
@@ -73,6 +92,8 @@ def parse_summon_file(summon_data):
 
     return SummonList(my_summon, helper_summons)
 
+#------------- Main ------------------------------------
+
 if __name__ == "__main__":
     args = get_args()
 
@@ -82,9 +103,14 @@ if __name__ == "__main__":
     summon_list = parse_summon_file(args.summons)
 
     #Figure out best weapon pool for each summon pair
+    result_list = []
     for summon_pair in summon_list.summon_pairs:
-        print ("** {} - {} **".format(summon_pair[0].name, summon_pair[1].name))
         damage, pool = weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
-        print ("Base Damage: {}".format(pool.base_damage))
-        print ("Damage: {}".format(damage))
-        print (pool)
+        result_list.append(OptimizationResults(damage, pool, summon_pair[0], summon_pair[1]))
+
+    # Sort result_list based on damage
+    result_list.sort(key=lambda x: x.damage, reverse=True)
+
+    for opt_result in result_list:
+        print (opt_result.results)
+
