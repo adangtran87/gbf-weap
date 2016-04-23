@@ -29,6 +29,8 @@ list of summon pairs. The script optimizes for attack/damage.
 * Only considering 'attack' weapon skills
   * Does not consider last stand attack modifiers
 * Does not take weapon preference into account
+* Only (pre-hl) single race bahamut weapons are supported
+  * Does *not* support sword, staff
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
 

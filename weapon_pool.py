@@ -38,7 +38,16 @@ class WeaponPool(object):
         self.normal_modifier = self._calc_multiplier(self.normal_list)
         self.magna_modifier = self._calc_multiplier(self.magna_list)
         self.unknown_modifier = self._calc_multiplier(self.unknown_list)
+
+        """ Section 3.7
+        For stacking rules, there is a limit on damage increase from bahamut
+        weapons (50%), you can stack two HL Bahamut weapons to give a mono race
+        maximum bonus of 50% Damage and 36% Health. You can also stack a HL
+        Bahamut Weapon with another Bahamut Weapon.
+        """
         self.bahamut_modifier = self._calc_multiplier(self.bahamut_list)
+        if self.bahamut_modifier > 0.5:
+            self.bahamut_modifier = 0.5
 
     def __str__(self):
         output = ""
