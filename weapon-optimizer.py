@@ -4,7 +4,7 @@ import json
 
 from wep_types import WeaponSkill, WeaponType, SummonType, Weapon, Summon
 from weapon_list import WeaponList
-
+from summon_list import SummonList
 def parse_config_file(file_data):
     root, ext = os.path.splitext(file_data)
     return FILE_PARSERS[ext](file_data)
@@ -20,7 +20,8 @@ FILE_PARSERS = {
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weapon', '-w', help='Path to weapon json file')
+    parser.add_argument('--weapons', '-w', help='Path to weapon json file')
+    parser.add_argument('--summons', '-s', help='Path to summon json file')
     return parser.parse_args()
 
 def parse_weapon_file(weapon_data):
@@ -48,34 +49,42 @@ def parse_weapon_file(weapon_data):
 
     return WeaponList(weapon_list)
 
+def parse_summon_file(summon_data):
+    summon_type_dict = {
+        'elemental': SummonType.elemental,
+        'magna': SummonType.magna,
+        'primal': SummonType.primal,
+        'ranko': SummonType.ranko,
+        'character': SummonType.character
+    }
+    summon_data = parse_config_file(summon_data)
+
+    #Parse my summon
+    my_summon = summon_data['my_summon']
+    my_summon['type'] = summon_type_dict[summon_data['my_summon']['type']]
+    my_summon = Summon(**my_summon)
+
+    #Parse helper summons
+    helper_summons = []
+    for summon_entry in summon_data['helper_list']:
+        summon_entry['type'] = summon_type_dict[summon_entry['type']]
+        summon = Summon(**summon_entry)
+        helper_summons.append(summon)
+
+    return SummonList(my_summon, helper_summons)
+
 if __name__ == "__main__":
     args = get_args()
 
-    print ("Parsing: {}".format(args.weapon))
-    weapon_list = parse_weapon_file(args.weapon)
+    print ("Parsing: {}".format(args.weapons))
+    weapon_list = parse_weapon_file(args.weapons)
+    print ("Parsing: {}".format(args.summons))
+    summon_list = parse_summon_file(args.summons)
 
-    # Create summons I care about right now
-    # Need to figure out best way to let users specify which combinations they care about
-    elemental_50 = Summon(SummonType.elemental, .5)
-    elemental_60 = Summon(SummonType.elemental, .6)
-    magna_50 = Summon(SummonType.magna, .5)
-    magna_100 = Summon(SummonType.magna, 1)
-
-    # Print results!
-    print ("** Elemental 50 - Elemental 60 **")
-    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, elemental_60)
-    print ("Base Damage: {}".format(pool.base_damage))
-    print ("Damage: {}".format(damage))
-    print (pool)
-
-    print ("** Elemental 50 - Magna 50 **")
-    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, magna_50)
-    print ("Base Damage: {}".format(pool.base_damage))
-    print ("Damage: {}".format(damage))
-    print (pool)
-
-    print ("** Elemental 50 - Magna 100 **")
-    damage, pool = weapon_list.optimize_weapon_summon(elemental_50, magna_100)
-    print ("Base Damage: {}".format(pool.base_damage))
-    print ("Damage: {}".format(damage))
-    print (pool)
+    #Figure out best weapon pool for each summon pair
+    for summon_pair in summon_list.summon_pairs:
+        print ("** {} - {} **".format(summon_pair[0].name, summon_pair[1].name))
+        damage, pool = weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
+        print ("Base Damage: {}".format(pool.base_damage))
+        print ("Damage: {}".format(damage))
+        print (pool)

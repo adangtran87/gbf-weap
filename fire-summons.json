@@ -1,0 +1,34 @@
+{
+  "my_summon": {
+    "name": "Katapillar",
+    "type": "elemental",
+    "multiplier": 0.5
+  },
+  "helper_list": [
+    {
+      "name": "Ifrit",
+      "type": "elemental",
+      "multiplier": 0.6
+    },
+    {
+      "name": "SSR Magna",
+      "type": "magna",
+      "multiplier": 0.5
+    },
+    {
+      "name": "MLB SSR Magna",
+      "type": "magna",
+      "multiplier": 1.0
+    },
+    {
+      "name": "Agnis",
+      "type": "primal",
+      "multiplier": 0.8
+    },
+    {
+      "name": "MLB Agnis",
+      "type": "primal",
+      "multiplier": 1.2
+    }
+  ]
+}

@@ -35,10 +35,10 @@ class Weapon(object):
             return float(0)
 
 class Summon(object):
-    def __init__(self, type, multiplier):
-        if isinstance(type, SummonType):
-            self.type = type
-            self.multiplier = multiplier
-        else:
-            raise ValueError("Summon type is not of type SummonType")
+    def __init__(self, **entries):
+        self.__dict__.update(entries)
+
+    def __str__(self):
+        output = "{}: {}, {}\n".format(self.name, self.type.name, self.multiplier)
+        return output
 
