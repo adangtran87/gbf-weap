@@ -1,8 +1,26 @@
 # gbf-weap
+This script tries to find the optimum weapon pool from a list of weapons and
+list of summon pairs. The script optimizes for attack/damage.
+
+
+##### Limitations
+* List of weapons and summons must be from the same element
+  * Weapon and summon lists must be in json format
+* Only considering 'attack' weapon skills
+  * Does not consider last stand attack modifiers
+* Does not take weapon preference into account
+* Stat sticks should have a skill type of 'none'
+* Current algorithm brute forces all weapon pool combinations
+  * Beware long weapon lists; have not tested limits
+
+Reference:
+[Ajantus's GBF Weapon/Summon Optimization](http://gbf-english.proboards.com/thread/595/#6)
+
 
 ### Toolchain
 * Python 2.7
 * enum34
+* Should be compatible with Python 3.4 but not continuously run
 
 ### How To Run
-`python weapon-optimizer.py -w fire-weapons.json`
+`python weapon-optimizer.py -s fire-summons.json -w fire-weapons.json`
