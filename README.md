@@ -4,12 +4,12 @@ list of summon pairs. The script optimizes for attack/damage.
 
 
 ##### Limitations
-* List of weapons and summons must be from the same element
+* List of weapons and summons must have weapon skills of the same element
   * Weapon and summon lists must be in json format
+  * Stat sticks should have a skill type of 'none'
 * Only considering 'attack' weapon skills
   * Does not consider last stand attack modifiers
 * Does not take weapon preference into account
-* Stat sticks should have a skill type of 'none'
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
 
