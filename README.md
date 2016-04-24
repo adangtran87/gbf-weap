@@ -45,4 +45,5 @@ list of summon pairs. The script optimizes for attack/damage.
 
 ### How To Run
 `python weapon-optimizer.py [-h] [--list_all] weapons summons`
+
 `python weapon-optimizer.py fire-weapons.json fire-summons.json`
