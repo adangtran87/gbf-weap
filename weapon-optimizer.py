@@ -39,8 +39,9 @@ FILE_PARSERS = {
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('--weapons', '-w', help='Path to weapon json file')
-    parser.add_argument('--summons', '-s', help='Path to summon json file')
+    parser.add_argument('weapons', metavar='weapons_file', help='Path to weapon json file')
+    parser.add_argument('summons', metavar='summons_file', help='Path to summon json file')
+    parser.add_argument('--list_all', '-l', dest='list_all', action='store_true', help='Print all optimization results')
     return parser.parse_args()
 
 def parse_weapon_file(weapon_data):
@@ -113,6 +114,11 @@ if __name__ == "__main__":
     # Sort result_list based on damage
     result_list.sort(key=lambda x: x.damage, reverse=True)
 
-    for opt_result in result_list:
+    if (args.list_all):
+        print_count = len(result_list)
+    else:
+        print_count = 3
+
+    for opt_result in result_list[:print_count]:
         print (opt_result.results)
 
