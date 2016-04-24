@@ -1,0 +1,36 @@
+{
+  "my_summons": [
+    {
+    "name": "MLB SSR Magna",
+    "type": "magna",
+    "multiplier": 1.0
+    },
+    {
+    "name": "MLB Ifrit",
+    "type": "elemental",
+    "multiplier": 0.6
+    }
+  ],
+  "helper_summons": [
+    {
+      "name": "MLB Ifrit",
+      "type": "elemental",
+      "multiplier": 0.6
+    },
+    {
+      "name": "MLB Athena",
+      "type": "elemental",
+      "multiplier": 0.8
+    },
+    {
+      "name": "MLB SSR Magna",
+      "type": "magna",
+      "multiplier": 1.0
+    },
+    {
+      "name": "MLB Agnis",
+      "type": "primal",
+      "multiplier": 1.2
+    }
+  ]
+}

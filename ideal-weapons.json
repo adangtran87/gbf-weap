@@ -1,0 +1,109 @@
+{
+  "weapon_list": [
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Bahamut Dagger",
+      "damage": 1415,
+      "weapon_type": "bahamut",
+      "weapon_skill": "none",
+      "skill_level": 10
+    },
+    {
+      "name": "Bahamut Dagger",
+      "damage": 1415,
+      "weapon_type": "bahamut",
+      "weapon_skill": "none",
+      "skill_level": 10
+    },
+    {
+      "name": "Scarlet Crest Axe",
+      "damage": 2330,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Dainslief",
+      "damage": 2277,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Hauteclaire",
+      "damage": 2298,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Lohengrin",
+      "damage": 2312,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Azoth",
+      "damage": 2258,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Florenberg",
+      "damage": 2115,
+      "weapon_type": "normal",
+      "weapon_skill": "none",
+      "skill_level": 0
+    }
+  ]
+}
