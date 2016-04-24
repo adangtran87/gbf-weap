@@ -107,12 +107,16 @@ if __name__ == "__main__":
 
     #Figure out best weapon pool for each summon pair
     result_list = []
+    combination_count = 0
     for summon_pair in summon_list.summon_pairs:
-        damage, pool = weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
+        damage, pool, count = weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
         result_list.append(OptimizationResults(damage, pool, summon_pair[0], summon_pair[1]))
+        combination_count += count
 
     # Sort result_list based on damage
     result_list.sort(key=lambda x: x.damage, reverse=True)
+
+    print ("Parsed {} weapon + summon combinations.\n".format(combination_count))
 
     if (args.list_all):
         print_count = len(result_list)
