@@ -1,10 +1,12 @@
 {
-  "my_summon": {
-    "name": "Katapillar",
-    "type": "elemental",
-    "multiplier": 0.5
-  },
-  "helper_list": [
+  "my_summons": [
+    {
+      "name": "Katapillar",
+      "type": "elemental",
+      "multiplier": 0.5
+    }
+  ],
+  "helper_summons": [
     {
       "name": "Ifrit",
       "type": "elemental",

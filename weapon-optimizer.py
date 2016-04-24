@@ -78,19 +78,21 @@ def parse_summon_file(summon_data):
     }
     summon_data = parse_config_file(summon_data)
 
-    #Parse my summon
-    my_summon = summon_data['my_summon']
-    my_summon['type'] = summon_type_dict[summon_data['my_summon']['type']]
-    my_summon = Summon(**my_summon)
+    #Parse my summons
+    my_summons = []
+    for summon_entry in summon_data['my_summons']:
+        summon_entry['type'] = summon_type_dict[summon_entry['type']]
+        summon = Summon(**summon_entry)
+        my_summons.append(summon)
 
     #Parse helper summons
     helper_summons = []
-    for summon_entry in summon_data['helper_list']:
+    for summon_entry in summon_data['helper_summons']:
         summon_entry['type'] = summon_type_dict[summon_entry['type']]
         summon = Summon(**summon_entry)
         helper_summons.append(summon)
 
-    return SummonList(my_summon, helper_summons)
+    return SummonList(my_summons, helper_summons)
 
 #------------- Main ------------------------------------
 
