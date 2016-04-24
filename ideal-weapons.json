@@ -51,14 +51,14 @@
     },
     {
       "name": "Bahamut Dagger",
-      "damage": 1415,
+      "damage": 2000,
       "weapon_type": "bahamut",
       "weapon_skill": "none",
       "skill_level": 10
     },
     {
       "name": "Bahamut Dagger",
-      "damage": 1415,
+      "damage": 2000,
       "weapon_type": "bahamut",
       "weapon_skill": "none",
       "skill_level": 10
@@ -104,6 +104,20 @@
       "weapon_type": "normal",
       "weapon_skill": "none",
       "skill_level": 0
+    },
+    {
+      "name": "Unknown 1",
+      "damage": 2000,
+      "weapon_type": "unknown",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Unknown 2",
+      "damage": 2000,
+      "weapon_type": "unknown",
+      "weapon_skill": "large",
+      "skill_level": 10
     }
   ]
 }
