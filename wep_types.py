@@ -10,6 +10,7 @@ class WeaponType(IntEnum):
     normal = 1
     magna = 2
     unknown = 3
+    strength = 5
     bahamut = 4
 
 class SummonType(IntEnum):

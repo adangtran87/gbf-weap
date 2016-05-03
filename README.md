@@ -33,6 +33,7 @@ list of summon pairs. The script optimizes for attack/damage.
 * magna
 * unknown
 * bahamut
+* strength
 
 ##### Weapon Skills
 * none

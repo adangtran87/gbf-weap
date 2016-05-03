@@ -15,6 +15,7 @@ class WeaponPool(object):
         self.normal_list = []
         self.magna_list = []
         self.unknown_list = []
+        self.strength_list = []
         self.bahamut_list = []
         self.other_list = []
 
@@ -28,6 +29,8 @@ class WeaponPool(object):
                 self.magna_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.unknown):
                 self.unknown_list.append(weapon)
+            elif (weapon.weapon_type == WeaponType.strength):
+                self.strength_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.bahamut):
                 self.bahamut_list.append(weapon)
             else:
@@ -38,7 +41,8 @@ class WeaponPool(object):
         self.normal_modifier = self._calc_multiplier(self.normal_list)
         self.magna_modifier = self._calc_multiplier(self.magna_list)
         self.unknown_modifier = self._calc_multiplier(self.unknown_list)
-
+        self.strength_modifier = self._calc_multiplier(self.strength_list)
+		
         """ Section 3.7
         For stacking rules, there is a limit on damage increase from bahamut
         weapons (50%), you can stack two HL Bahamut weapons to give a mono race
@@ -54,7 +58,7 @@ class WeaponPool(object):
         output += "Number of weapons: {}\n".format(len(self.weapon_list))
         for weapon in self.weapon_list:
             output += str(weapon)
-        output += "N:{:.2f} M:{:.2f} U:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.bahamut_modifier)
+        output += "N:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.strength_modifier, self.bahamut_modifier)
         return output
 
     @property
@@ -66,6 +70,9 @@ class WeaponPool(object):
     @property
     def unknown_count(self):
         return len(unknown_list)
+    @property
+    def strength_count(self):
+        return len(strength_list)
     @property
     def bahamut_count(self):
         return len(bahamut_list)
@@ -110,7 +117,8 @@ class WeaponPool(object):
         normal_mod += summon_mult['character']
 
         unknown_mod = 1 + (self.unknown_modifier * summon_mult['ranko'])
-
+        unknown_mod += self.strength_modifier
+		
         elemental_mod = 1 + summon_mult['elemental']
 
         #Calculate total damage
