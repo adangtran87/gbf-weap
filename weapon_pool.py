@@ -13,6 +13,7 @@ class WeaponPool(object):
         self.weapon_list= weapon_pool
 
         self.normal_list = []
+        self.normal2_list = []
         self.magna_list = []
         self.unknown_list = []
         self.strength_list = []
@@ -25,6 +26,8 @@ class WeaponPool(object):
         for weapon in weapon_pool:
             if (weapon.weapon_type == WeaponType.normal):
                 self.normal_list.append(weapon)
+            if (weapon.weapon_type == WeaponType.normal2):
+                self.normal2_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.magna):
                 self.magna_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.unknown):
@@ -39,6 +42,7 @@ class WeaponPool(object):
             self.base_damage += weapon.damage
 
         self.normal_modifier = self._calc_multiplier(self.normal_list)
+        self.normal2_modifier = self._calc_multiplier(self.normal2_list)
         self.magna_modifier = self._calc_multiplier(self.magna_list)
         self.unknown_modifier = self._calc_multiplier(self.unknown_list)
         self.strength_modifier = self._calc_multiplier(self.strength_list)
@@ -58,12 +62,14 @@ class WeaponPool(object):
         output += "Number of weapons: {}\n".format(len(self.weapon_list))
         for weapon in self.weapon_list:
             output += str(weapon)
-        output += "N:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.strength_modifier, self.bahamut_modifier)
+        output += "N:{:.2f} N2:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.normal2_modifier, self.magna_modifier, self.unknown_modifier, self.strength_modifier, self.bahamut_modifier)
         return output
 
     @property
     def normal_count(self):
         return len(normal_list)
+    def normal2_count(self):
+        return len(normal2_list)
     @property
     def magna_count(self):
         return len(magna_count)
@@ -113,6 +119,7 @@ class WeaponPool(object):
         magna_mod = 1 + (self.magna_modifier * summon_mult['magna'])
 
         normal_mod = 1 + (self.normal_modifier * summon_mult['primal'])
+        normal_mod += self.normal2_modifier * summon_mult['primal']
         normal_mod += self.bahamut_modifier
         normal_mod += summon_mult['character']
 
