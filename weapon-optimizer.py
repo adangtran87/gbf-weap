@@ -47,8 +47,10 @@ def get_args():
 def parse_weapon_file(weapon_data):
     weapon_type_dict= {
         'normal': WeaponType.normal,
+        'normal2': WeaponType.normal2,
         'magna': WeaponType.magna,
         'unknown': WeaponType.unknown,
+        'strength': WeaponType.strength,
         'bahamut': WeaponType.bahamut,
     }
     weapon_skill_dict = {

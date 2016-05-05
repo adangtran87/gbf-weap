@@ -30,9 +30,11 @@ list of summon pairs. The script optimizes for attack/damage.
 ### JSON enum strings
 ##### Weapon Type
 * normal
+* normal2
 * magna
 * unknown
 * bahamut
+* strength
 
 ##### Weapon Skills
 * none

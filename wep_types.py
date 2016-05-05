@@ -8,8 +8,10 @@ class WeaponSkill(IntEnum):
 
 class WeaponType(IntEnum):
     normal = 1
+    normal2 = 6
     magna = 2
     unknown = 3
+    strength = 5
     bahamut = 4
 
 class SummonType(IntEnum):
@@ -37,10 +39,13 @@ class Weapon(object):
         if self.weapon_type == WeaponType.bahamut:
             return bahamut_multiplier[self.skill_level - 1]
         else:
-            if self.weapon_skill != WeaponSkill.none:
-                return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+            if self.weapon_type == WeaponType.normal2:
+                return (float(self.weapon_skill) + 1 + (self.skill_level - 1)) / 100
             else:
-                return float(0)
+                if self.weapon_skill != WeaponSkill.none:
+                    return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+                else:
+                    return float(0)
 
 class Summon(object):
     def __init__(self, **entries):

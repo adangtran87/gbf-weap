@@ -16,18 +16,24 @@ class WeaponList:
 
     def _sort_weapons(self):
         self.normal_list = []
+        self.normal2_list = []
         self.magna_list = []
         self.unknown_list = []
+        self.strength_list = []
         self.bahamut_list = []
         self.other_list = []
         #Sort weapons
         for weapon in self.weapon_list:
             if (weapon.weapon_type == WeaponType.normal):
                 self.normal_list.append(weapon)
+            if (weapon.weapon_type == WeaponType.normal2):
+                self.normal2_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.magna):
                 self.magna_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.unknown):
                 self.unknown_list.append(weapon)
+            elif (weapon.weapon_type == WeaponType.strength):
+                self.strength_list.append(weapon)
             elif (weapon.weapon_type == WeaponType.bahamut):
                 self.bahamut_list.append(weapon)
             else:
