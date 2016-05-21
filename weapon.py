@@ -9,7 +9,7 @@ class WeaponSkill(IntEnum):
     large = 6
 
 # One hot encoding of race for mask selection
-class BahamutRace(IntEnum):
+class CharacterRace(IntEnum):
     unknown = 0xF
     human = 1
     erun = 2
@@ -39,7 +39,10 @@ BAHAMUT_MULTIPLIER = {
                                         0.10, 0.105, 0.11, 0.115, 0.12,
                                         0.125, 0.13, 0.135, 0.14, 0.15,
                                     ],
-    BahamutType.hp.name:            0,
+    BahamutType.hp.name:            [
+                                        0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 0,
+                                    ],
 }
 
 BAHAMUT_TYPE = {
@@ -56,16 +59,16 @@ BAHAMUT_TYPE = {
 }
 
 BAHAMUT_RACE = {
-    'sword': (BahamutRace.human | BahamutRace.doraf),
-    'dagger': BahamutRace.human,
-    'spear': BahamutRace.erun,
-    'axe': BahamutRace.doraf,
-    'staff': (BahamutRace.erun | BahamutRace.harvin),
-    'gun': BahamutRace.harvin,
-    'fist': BahamutRace.human,
-    'bow': BahamutRace.erun,
-    'harp': BahamutRace.harvin,
-    'katana': BahamutRace.doraf,
+    'sword': (CharacterRace.human | CharacterRace.doraf),
+    'dagger': CharacterRace.human,
+    'spear': CharacterRace.erun,
+    'axe': CharacterRace.doraf,
+    'staff': (CharacterRace.erun | CharacterRace.harvin),
+    'gun': CharacterRace.harvin,
+    'fist': CharacterRace.human,
+    'bow': CharacterRace.erun,
+    'harp': CharacterRace.harvin,
+    'katana': CharacterRace.doraf,
 }
 
 HL_BAHAMUT_MULTIPLIER = {
@@ -73,7 +76,10 @@ HL_BAHAMUT_MULTIPLIER = {
                                         0.300, 0.304, 0.308,
                                         0.312, 0.316, 0.320
                                     ],
-    BahamutType.continuous.name:    0,
+    BahamutType.continuous.name:    [
+                                        0, 0, 0, 0, 0,
+                                        0, 0, 0, 0, 0,
+                                    ],
 }
 
 HL_BAHAMUT_TYPE = {
@@ -90,16 +96,16 @@ HL_BAHAMUT_TYPE = {
 }
 
 HL_BAHAMUT_RACE= {
-    'sword': (BahamutRace.human | BahamutRace.doraf),
-    'dagger': (BahamutRace.human | BahamutRace.erun),
-    'spear': (BahamutRace.erun | BahamutRace.doraf),
-    'axe': (BahamutRace.doraf | BahamutRace.harvin),
-    'staff': (BahamutRace.erun | BahamutRace.harvin),
-    'gun': (BahamutRace.harvin | BahamutRace.human),
-    'fist': BahamutRace.human,
-    'bow': BahamutRace.erun,
-    'harp': BahamutRace.harvin,
-    'katana': BahamutRace.doraf,
+    'sword': (CharacterRace.human | CharacterRace.doraf),
+    'dagger': (CharacterRace.human | CharacterRace.erun),
+    'spear': (CharacterRace.erun | CharacterRace.doraf),
+    'axe': (CharacterRace.doraf | CharacterRace.harvin),
+    'staff': (CharacterRace.erun | CharacterRace.harvin),
+    'gun': (CharacterRace.harvin | CharacterRace.human),
+    'fist': CharacterRace.human,
+    'bow': CharacterRace.erun,
+    'harp': CharacterRace.harvin,
+    'katana': CharacterRace.doraf,
 }
 
 ###############################################################################
@@ -180,13 +186,14 @@ class WeaponBahamut(WeaponBase):
 
         self.bahamut_type = BAHAMUT_TYPE[self.weapon_type]
         self.bahamut_race = BAHAMUT_RACE[self.weapon_type]
+        self.applied_race = CharacterRace.unknown
         return
 
     @property
-    def multiplier(self, race = BahamutRace.unknown):
+    def multiplier(self):
         multiplier = 0
         # If matching one of the race flags
-        if (race & self.bahamut_race != 0):
+        if (self.applied_race & self.bahamut_race != 0):
             multiplier = BAHAMUT_MULTIPLIER[self.bahamut_type.name][self.skill_level-1]
         else:
             multiplier = 0
@@ -202,13 +209,14 @@ class WeaponHLBahamut(WeaponBase):
 
         self.bahamut_type = HL_BAHAMUT_TYPE[self.weapon_type]
         self.bahamut_race = HL_BAHAMUT_RACE[self.weapon_type]
+        self.applied_race = CharacterRace.unknown
         return
 
     @property
-    def multiplier(self, race = BahamutRace.unknown):
+    def multiplier(self):
         multiplier = 0
         # If matching one of the race flags
-        if (race & self.bahamut_race != 0):
+        if (self.applied_race & self.bahamut_race != 0):
             multiplier = HL_BAHAMUT_MULTIPLIER[self.bahamut_type.name][self.skill_level-10]
         else:
             multiplier = 0
