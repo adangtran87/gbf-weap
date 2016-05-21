@@ -2,8 +2,9 @@ import os
 import argparse
 import json
 
-from wep_types import WeaponSkill, WeaponType, SummonType, Weapon, Summon
+from weapon import WeaponSkill, WeaponType, Weapon
 from weapon_list import WeaponList
+from summon import SummonType, Summon
 from summon_list import SummonList
 
 #------------- Optimization Results -----------------------

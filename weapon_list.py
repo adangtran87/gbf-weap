@@ -1,5 +1,6 @@
 import itertools
-from wep_types import WeaponType, SummonType, Weapon, Summon
+from weapon import WeaponType, Weapon
+from summon import SummonType, Summon
 from weapon_pool import WeaponPool
 
 class WeaponList:

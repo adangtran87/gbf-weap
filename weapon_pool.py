@@ -1,4 +1,5 @@
-from wep_types import WeaponType, SummonType, Weapon, Summon
+from weapon import WeaponType, Weapon
+from summon import SummonType, Summon
 
 class WeaponPool(object):
     def __new__(cls, weapon_pool):
