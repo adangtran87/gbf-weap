@@ -5,6 +5,7 @@ class WeaponSkill(IntEnum):
     small = 1
     medium = 3
     large = 6
+    sword = 100
 
 class WeaponType(IntEnum):
     normal = 1
@@ -35,7 +36,10 @@ class Weapon(object):
             0.304, 0.308, 0.312, 0.316, 0.320,
         ]
         if self.weapon_type == WeaponType.bahamut:
-            return bahamut_multiplier[self.skill_level - 1]
+            multiplier = bahamut_multiplier[self.skill_level - 1]
+            if self.weapon_skill == WeaponSkill.sword:
+                multiplier = multiplier / 2
+            return multiplier
         else:
             if self.weapon_skill != WeaponSkill.none:
                 return (float(self.weapon_skill) + (self.skill_level - 1)) / 100

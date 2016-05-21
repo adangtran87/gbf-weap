@@ -45,7 +45,7 @@ class WeaponPool(object):
         maximum bonus of 50% Damage and 36% Health. You can also stack a HL
         Bahamut Weapon with another Bahamut Weapon.
         """
-        self.bahamut_modifier = self._calc_multiplier(self.bahamut_list)
+        self.bahamut_modifier = self._calc_bahamut_multiplier(self.bahamut_list)
         if self.bahamut_modifier > 0.5:
             self.bahamut_modifier = 0.5
 
@@ -74,6 +74,19 @@ class WeaponPool(object):
         multiplier = 0
         for weapon in weapon_list:
             multiplier += weapon.multiplier
+        return multiplier
+
+    def _calc_bahamut_multiplier(self, bahamut_list):
+        multiplier = 0
+        weapon_30 = False
+        weapon_15 = False
+        for weapon in bahamut_list:
+            if (not weapon_30 and weapon.multiplier > .15):
+                multiplier += weapon.multiplier
+                weapon_30 = True
+            if (not weapon_15 and weapon.multiplier <= .15):
+                multiplier += weapon.multiplier
+                weapon_15 = True
         return multiplier
 
     def _calc_summon_multipliers(self, summon_list):
