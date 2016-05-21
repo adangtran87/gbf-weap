@@ -24,6 +24,12 @@ class BahamutType(IntEnum):
 
 WEAPON_SKILL_DICT = parse_enum_into_dict(WeaponSkill)
 
+WEAPON_TYPE_LIST = [
+        'sword', 'dagger', 'spear', 'axe',
+        'staff', 'gun', 'fist', 'bow',
+        'harp', 'katana'
+    ]
+
 BAHAMUT_MULTIPLIER = {
     BahamutType.attack.name:        [
                                         0.20, 0.21, 0.22, 0.23, 0.24,
@@ -83,7 +89,7 @@ HL_BAHAMUT_TYPE = {
     'katana': BahamutType.continuous,
 }
 
-HL_BAHAMUT_TYPE = {
+HL_BAHAMUT_RACE= {
     'sword': (BahamutRace.human | BahamutRace.doraf),
     'dagger': (BahamutRace.human | BahamutRace.erun),
     'spear': (BahamutRace.erun | BahamutRace.doraf),
@@ -191,7 +197,7 @@ class WeaponHLBahamut(WeaponBase):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
 
-        if self.skill_level > 10:
+        if self.skill_level < 10:
             raise AttributeError("HL Bahamut weapons cannot be less than 10. Use Bahamut class")
 
         self.bahamut_type = HL_BAHAMUT_TYPE[self.weapon_type]
