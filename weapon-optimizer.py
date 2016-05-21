@@ -6,7 +6,6 @@ from weapon import *
 from weapon_list import WeaponList
 from summon import SummonType, Summon
 from summon_list import SummonList
-from utils import parse_enum_into_dict
 
 #------------- Optimization Results -----------------------
 class OptimizationResults:
@@ -70,20 +69,17 @@ def parse_weapon_file(weapon_data):
     return WeaponList(weapon_list)
 
 def parse_summon_file(summon_data):
-    summon_type_dict = parse_enum_into_dict(SummonType)
     summon_data = parse_config_file(summon_data)
 
     #Parse my summons
     my_summons = []
     for summon_entry in summon_data['my_summons']:
-        summon_entry['type'] = summon_type_dict[summon_entry['type']]
         summon = Summon(**summon_entry)
         my_summons.append(summon)
 
     #Parse helper summons
     helper_summons = []
     for summon_entry in summon_data['helper_summons']:
-        summon_entry['type'] = summon_type_dict[summon_entry['type']]
         summon = Summon(**summon_entry)
         helper_summons.append(summon)
 
