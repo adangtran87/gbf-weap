@@ -36,9 +36,9 @@ class WeaponPool(object):
 
             self.base_damage += weapon.damage
 
-        self.normal_modifier = self._calc_multiplier(self.normal_list)
-        self.magna_modifier = self._calc_multiplier(self.magna_list)
-        self.unknown_modifier = self._calc_multiplier(self.unknown_list)
+        self.normal_modifier = round(self._calc_multiplier(self.normal_list),2)
+        self.magna_modifier = round(self._calc_multiplier(self.magna_list),2)
+        self.unknown_modifier = round(self._calc_multiplier(self.unknown_list),2)
 
         """ Section 3.7
         For stacking rules, there is a limit on damage increase from bahamut
@@ -46,7 +46,7 @@ class WeaponPool(object):
         maximum bonus of 50% Damage and 36% Health. You can also stack a HL
         Bahamut Weapon with another Bahamut Weapon.
         """
-        self.bahamut_modifier = self._calc_multiplier(self.bahamut_list)
+        self.bahamut_modifier = round(self._calc_multiplier(self.bahamut_list),2)
         if self.bahamut_modifier > 0.5:
             self.bahamut_modifier = 0.5
 
