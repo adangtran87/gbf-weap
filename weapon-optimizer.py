@@ -6,6 +6,7 @@ from weapon import WeaponSkill, WeaponType, Weapon
 from weapon_list import WeaponList
 from summon import SummonType, Summon
 from summon_list import SummonList
+from utils import parse_enum_into_dict
 
 #------------- Optimization Results -----------------------
 class OptimizationResults:
@@ -25,12 +26,6 @@ class OptimizationResults:
         return output
 
 #------------- Parsing ------------------------------------
-def parse_enum_into_dict(enum_class):
-    translate_dict = {}
-    for enum in enum_class:
-        translate_dict[enum.name] = enum
-    return translate_dict
-
 def parse_config_file(file_data):
     root, ext = os.path.splitext(file_data)
     return FILE_PARSERS[ext](file_data)
