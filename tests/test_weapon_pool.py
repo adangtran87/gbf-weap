@@ -6,9 +6,10 @@ from weapon_pool import WeaponPool
 
 class TestWeaponPool(unittest.TestCase):
     def setUp(self):
-        wep_list = [ 'normal', 'normal2', 'unknown',
-                     'magna', 'magna', 'magna', 'magna', 'magna',
-                     ('bahamut', 'sword'), ('hl_bahamut', 'dagger'),
+        wep_list = [
+                    'normal', 'normal2', 'unknown', 'strength',
+                    'magna', 'magna', 'magna', 'magna',
+                    ('bahamut', 'sword'), ('hl_bahamut', 'dagger'),
                    ]
         self.weapon_pool = self._create_pool_from_list(wep_list)
         pass
@@ -72,6 +73,15 @@ class TestWeaponPool(unittest.TestCase):
                                 'weapon_skill': 'large',
                                 'skill_level': 10
                                 })
+                elif (wep_type == 'strength'):
+                    weapon = WeaponStrength(**{
+                                'name': index,
+                                'weapon_class': "strength",
+                                'damage': 1000,
+                                'weapon_type': 'sword',
+                                'weapon_skill': 'large',
+                                'skill_level': 10
+                                })
             pool_list.append(weapon)
         return WeaponPool(pool_list)
 
@@ -84,12 +94,16 @@ class TestWeaponPool(unittest.TestCase):
         self.assertEqual(self.weapon_pool.normal_modifier, 0.31)
 
     def test_weapon_pool_magna_mod(self):
-        # 5 Magna sl 10 = 5*15 = 0.75
-        self.assertEqual(self.weapon_pool.magna_modifier, 0.75)
+        # 4 Magna sl 10 = 4*15 = 0.60
+        self.assertEqual(self.weapon_pool.magna_modifier, 0.60)
 
     def test_weapon_pool_unknown_mod(self):
         # 1 Unknown sl 10 = .15
         self.assertEqual(self.weapon_pool.unknown_modifier, 0.15)
+
+    def test_weapon_pool_strength_mod(self):
+        # 1 strength sl 10 = .15
+        self.assertEqual(self.weapon_pool.strength_modifier, 0.15)
 
     def test_weapon_pool_bahamut_mod(self):
         # 1 bahamut sword sl 10 = .15

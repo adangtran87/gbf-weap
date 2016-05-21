@@ -177,6 +177,16 @@ class WeaponUnknown(WeaponBase):
     def multiplier(self):
         return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
 
+class WeaponStrength(WeaponBase):
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+        self.weapon_skill = WEAPON_SKILL_DICT[self.weapon_skill]
+        return
+
+    @property
+    def multiplier(self):
+        return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+
 class WeaponBahamut(WeaponBase):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)

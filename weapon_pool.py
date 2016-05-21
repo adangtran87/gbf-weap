@@ -17,6 +17,7 @@ class WeaponPool(object):
         self.magna_list = []
         self.unknown_list = []
         self.bahamut_list = []
+        self.strength_list = []
         self.other_list = []
 
         self.base_damage = 0
@@ -29,6 +30,8 @@ class WeaponPool(object):
                 self.magna_list.append(weapon)
             elif (isinstance(weapon, WeaponUnknown)):
                 self.unknown_list.append(weapon)
+            elif (isinstance(weapon, WeaponStrength)):
+                self.strength_list.append(weapon)
             elif (isinstance(weapon, WeaponBahamut) or isinstance(weapon, WeaponHLBahamut)):
                 self.bahamut_list.append(weapon)
             else:
@@ -39,6 +42,7 @@ class WeaponPool(object):
         self.normal_modifier = round(self._calc_multiplier(self.normal_list),2)
         self.magna_modifier = round(self._calc_multiplier(self.magna_list),2)
         self.unknown_modifier = round(self._calc_multiplier(self.unknown_list),2)
+        self.strength_modifier = round(self._calc_multiplier(self.strength_list),2)
 
         """ Section 3.7
         For stacking rules, there is a limit on damage increase from bahamut
@@ -55,7 +59,12 @@ class WeaponPool(object):
         output += "Number of weapons: {}\n".format(len(self.weapon_list))
         for weapon in self.weapon_list:
             output += str(weapon)
-        output += "N:{:.2f} M:{:.2f} U:{:.2f} B:{:.2f}\n".format(self.normal_modifier, self.magna_modifier, self.unknown_modifier, self.bahamut_modifier)
+        output += "N:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(
+                   self.normal_modifier,
+                   self.magna_modifier,
+                   self.unknown_modifier,
+                   self.strength_modifier,
+                   self.bahamut_modifier)
         return output
 
     @property
@@ -111,6 +120,7 @@ class WeaponPool(object):
         normal_mod += summon_mult['character']
 
         unknown_mod = 1 + (self.unknown_modifier * summon_mult['ranko'])
+        unknown_mod += self.strength_modifier
 
         elemental_mod = 1 + summon_mult['elemental']
 
