@@ -24,6 +24,12 @@ class OptimizationResults:
         return output
 
 #------------- Parsing ------------------------------------
+def parse_enum_into_dict(enum_class):
+    translate_dict = {}
+    for enum in enum_class:
+        translate_dict[enum.name] = enum
+    return translate_dict
+
 def parse_config_file(file_data):
     root, ext = os.path.splitext(file_data)
     return FILE_PARSERS[ext](file_data)
@@ -45,18 +51,8 @@ def get_args():
     return parser.parse_args()
 
 def parse_weapon_file(weapon_data):
-    weapon_type_dict= {
-        'normal': WeaponType.normal,
-        'magna': WeaponType.magna,
-        'unknown': WeaponType.unknown,
-        'bahamut': WeaponType.bahamut,
-    }
-    weapon_skill_dict = {
-        'none': WeaponSkill.none,
-        'small': WeaponSkill.small,
-        'medium': WeaponSkill.medium,
-        'large': WeaponSkill.large,
-    }
+    weapon_type_dict = parse_enum_into_dict(WeaponType)
+    weapon_skill_dict= parse_enum_into_dict(WeaponSkill)
     weapon_list = []
     weapon_data = parse_config_file(weapon_data)
 
@@ -70,13 +66,7 @@ def parse_weapon_file(weapon_data):
     return WeaponList(weapon_list)
 
 def parse_summon_file(summon_data):
-    summon_type_dict = {
-        'elemental': SummonType.elemental,
-        'magna': SummonType.magna,
-        'primal': SummonType.primal,
-        'ranko': SummonType.ranko,
-        'character': SummonType.character
-    }
+    summon_type_dict = parse_enum_into_dict(SummonType)
     summon_data = parse_config_file(summon_data)
 
     #Parse my summons
