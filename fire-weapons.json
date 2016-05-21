@@ -1,53 +1,11 @@
 {
   "weapon_list": [
     {
-      "name": "M SR Dagger",
-      "damage": 1285,
-      "weapon_type": "magna",
-      "weapon_skill": "medium",
-      "skill_level": 4
-    },
-    {
-      "name": "M SR Axe",
-      "damage": 993,
-      "weapon_type": "magna",
-      "weapon_skill": "medium",
-      "skill_level": 4
-    },
-    {
-      "name": "M SR Dagger",
-      "damage": 673,
-      "weapon_type": "magna",
-      "weapon_skill": "medium",
-      "skill_level": 3
-    },
-    {
-      "name": "M SR Fist",
-      "damage": 1134,
-      "weapon_type": "magna",
-      "weapon_skill": "medium",
-      "skill_level": 3
-    },
-    {
-      "name": "M SR Fist",
-      "damage": 1003,
-      "weapon_type": "magna",
-      "weapon_skill": "medium",
-      "skill_level": 3
-    },
-    {
-      "name": "SR Belt",
-      "damage": 1415,
-      "weapon_type": "normal",
-      "weapon_skill": "medium",
-      "skill_level": 2
-    },
-    {
       "name": "Scarlet Crest Axe",
-      "damage": 1330,
+      "damage": 1770,
       "weapon_type": "normal",
       "weapon_skill": "large",
-      "skill_level": 2
+      "skill_level": 3
     },
     {
       "name": "Dainslief",
@@ -71,20 +29,6 @@
       "skill_level": 1
     },
     {
-      "name": "Bewitching Bouquet",
-      "damage": 1007,
-      "weapon_type": "normal",
-      "weapon_skill": "large",
-      "skill_level": 1
-    },
-    {
-      "name": "Azoth",
-      "damage": 1258,
-      "weapon_type": "normal",
-      "weapon_skill": "large",
-      "skill_level": 1
-    },
-    {
       "name": "Florenberg",
       "damage": 2115,
       "weapon_type": "normal",
@@ -92,11 +36,67 @@
       "skill_level": 0
     },
     {
+      "name": "Ifrit Halberd",
+      "damage": 1860,
+      "weapon_type": "normal",
+      "weapon_skill": "large",
+      "skill_level": 1
+    },
+    {
+      "name": "Red Sun",
+      "damage": 1791,
+      "weapon_type": "unknown",
+      "weapon_skill": "large",
+      "skill_level": 6
+    },
+    {
+      "name": "Bahamut Sword",
+      "damage": 1348,
+      "weapon_type": "bahamut",
+      "weapon_skill": "sword",
+      "skill_level": 1
+    },
+    {
+      "name": "M SSR Gun",
+      "damage": 2041,
+      "weapon_type": "magna",
+      "weapon_skill": "none",
+      "skill_level": 1
+    },
+    {
       "name": "M SSR Staff",
       "damage": 979,
       "weapon_type": "magna",
       "weapon_skill": "large",
-      "skill_level": 2
+      "skill_level": 6
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 979,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 6
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 979,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 6
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 979,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 6
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 979,
+      "weapon_type": "magna",
+      "weapon_skill": "large",
+      "skill_level": 6
     }
   ]
 }
