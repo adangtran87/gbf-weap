@@ -2,7 +2,7 @@ import os
 import argparse
 import json
 
-from weapon import WeaponSkill, WeaponType, Weapon
+from weapon import *
 from weapon_list import WeaponList
 from summon import SummonType, Summon
 from summon_list import SummonList
@@ -47,16 +47,24 @@ def get_args():
     return parser.parse_args()
 
 def parse_weapon_file(weapon_data):
-    weapon_type_dict = parse_enum_into_dict(WeaponType)
-    weapon_skill_dict= parse_enum_into_dict(WeaponSkill)
     weapon_list = []
     weapon_data = parse_config_file(weapon_data)
 
     for weapon_entry in weapon_data["weapon_list"]:
-        # Replace strings with types
-        weapon_entry['weapon_type'] = weapon_type_dict[weapon_entry['weapon_type']]
-        weapon_entry['weapon_skill'] = weapon_skill_dict[weapon_entry['weapon_skill']]
-        weapon = Weapon(**weapon_entry)
+        if (weapon_entry['weapon_class'] == "normal"):
+            weapon = WeaponNormal(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "normal2"):
+            weapon = WeaponNormal2(**weapon_entry['args'])
+        elif (weapon_entry['weapon_class'] == "magna"):
+            weapon = WeaponMagna(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "unknown"):
+            weapon = WeaponUnknown(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "bahamut"):
+            weapon = WeaponBahamut(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "hl_bahamut"):
+            weapon = WeaponHLBahamut(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "stat_stick"):
+            weapon = WeaponStatStick(**weapon_entry)
         weapon_list.append(weapon)
 
     return WeaponList(weapon_list)

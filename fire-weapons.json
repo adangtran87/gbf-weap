@@ -2,99 +2,94 @@
   "weapon_list": [
     {
       "name": "Scarlet Crest Axe",
+      "weapon_class": "normal",
       "damage": 1770,
-      "weapon_type": "normal",
+      "weapon_type": "axe",
       "weapon_skill": "large",
       "skill_level": 3
     },
     {
-      "name": "Dainslief",
-      "damage": 1277,
-      "weapon_type": "normal",
-      "weapon_skill": "large",
-      "skill_level": 1
-    },
-    {
-      "name": "Hauteclaire",
-      "damage": 1298,
-      "weapon_type": "normal",
-      "weapon_skill": "large",
-      "skill_level": 1
-    },
-    {
       "name": "Lohengrin",
+      "weapon_class": "normal",
       "damage": 1312,
-      "weapon_type": "normal",
+      "weapon_type": "sword",
       "weapon_skill": "large",
       "skill_level": 1
     },
     {
       "name": "Florenberg",
+      "weapon_class": "stat_stick",
       "damage": 2115,
-      "weapon_type": "normal",
-      "weapon_skill": "none",
-      "skill_level": 0
+      "weapon_type": "dagger"
     },
     {
       "name": "Ifrit Halberd",
+      "weapon_class": "normal",
       "damage": 1860,
-      "weapon_type": "normal",
+      "weapon_type": "spear",
       "weapon_skill": "large",
       "skill_level": 1
     },
     {
       "name": "Red Sun",
+      "weapon_class": "unknown",
       "damage": 1791,
-      "weapon_type": "unknown",
+      "weapon_type": "katana",
       "weapon_skill": "large",
       "skill_level": 6
     },
     {
       "name": "Bahamut Sword",
+      "weapon_class": "bahamut",
       "damage": 1348,
-      "weapon_type": "bahamut",
-      "weapon_skill": "sword",
+      "weapon_type": "sword",
       "skill_level": 1
     },
     {
-      "name": "M SSR Gun",
-      "damage": 2041,
-      "weapon_type": "magna",
+      "name": "Colossus Carbine Omega",
+      "weapon_class": "magna",
+      "damage": 2450,
+      "weapon_type": "gun",
       "weapon_skill": "none",
       "skill_level": 1
     },
     {
-      "name": "M SSR Staff",
+      "name": "Colossus Cane Omega",
+      "weapon_class": "magna",
       "damage": 979,
-      "weapon_type": "magna",
+      "weapon_type": "staff",
       "weapon_skill": "large",
       "skill_level": 6
     },
     {
-      "name": "M SSR Staff",
+      "name": "Colossus Cane Omega",
+      "weapon_class": "magna",
       "damage": 979,
-      "weapon_type": "magna",
+      "weapon_type": "staff",
       "weapon_skill": "large",
       "skill_level": 6
     },
     {
-      "name": "M SSR Staff",
+      "name": "Colossus Cane Omega",
+      "weapon_class": "magna",
       "damage": 979,
-      "weapon_type": "magna",
+      "weapon_type": "staff",
       "weapon_skill": "large",
       "skill_level": 6
     },
     {
-      "name": "M SSR Staff",
+      "name": "Colossus Cane Omega",
+      "weapon_class": "magna",
       "damage": 979,
-      "weapon_type": "magna",
+      "weapon_type": "staff",
       "weapon_skill": "large",
       "skill_level": 6
     },
     {
-      "name": "M SSR Staff",
+      "name": "Colossus Cane Omega",
+      "weapon_class": "magna",
       "damage": 979,
-      "weapon_type": "magna",
+      "weapon_type": "staff",
       "weapon_skill": "large",
       "skill_level": 6
     }

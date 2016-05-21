@@ -1,5 +1,5 @@
 import itertools
-from weapon import WeaponType, Weapon
+from weapon import *
 from summon import SummonType, Summon
 from weapon_pool import WeaponPool
 
@@ -14,25 +14,6 @@ class WeaponList:
         for weapon in self.weapon_list:
             output += str(weapon)
         return output
-
-    def _sort_weapons(self):
-        self.normal_list = []
-        self.magna_list = []
-        self.unknown_list = []
-        self.bahamut_list = []
-        self.other_list = []
-        #Sort weapons
-        for weapon in self.weapon_list:
-            if (weapon.weapon_type == WeaponType.normal):
-                self.normal_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.magna):
-                self.magna_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.unknown):
-                self.unknown_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.bahamut):
-                self.bahamut_list.append(weapon)
-            else:
-                self.other_list.append(weapon)
 
     def optimize_weapon_summon(self, summon1, summon2):
         best_damage = 0

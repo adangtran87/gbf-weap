@@ -1,4 +1,4 @@
-from weapon import WeaponType, Weapon
+from weapon import *
 from summon import SummonType, Summon
 
 class WeaponPool(object):
@@ -23,13 +23,13 @@ class WeaponPool(object):
 
         # Sort weapons
         for weapon in weapon_pool:
-            if (weapon.weapon_type == WeaponType.normal):
+            if (isinstance(weapon, WeaponNormal) or isinstance(weapon,WeaponNormal2)):
                 self.normal_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.magna):
+            elif (isinstance(weapon, WeaponMagna)):
                 self.magna_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.unknown):
+            elif (isinstance(weapon, WeaponUnknown)):
                 self.unknown_list.append(weapon)
-            elif (weapon.weapon_type == WeaponType.bahamut):
+            elif (isinstance(weapon, WeaponBahamut) or isinstance(weapon, WeaponHLBahamut)):
                 self.bahamut_list.append(weapon)
             else:
                 self.other_list.append(weapon)
