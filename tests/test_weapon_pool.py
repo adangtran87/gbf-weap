@@ -3,6 +3,7 @@ import unittest
 
 from weapon import *
 from weapon_pool import WeaponPool
+from summon import Summon, SummonType
 
 class TestWeaponPool(unittest.TestCase):
     def setUp(self):
@@ -12,6 +13,20 @@ class TestWeaponPool(unittest.TestCase):
                     ('bahamut', 'sword'), ('hl_bahamut', 'dagger'),
                    ]
         self.weapon_pool = self._create_pool_from_list(wep_list)
+
+        self.summon_none = Summon("none", 'elemental', 0.0);
+        self.summon_elemental = Summon("elemental", 'elemental', 0.5)
+        self.summon_magna = Summon('magna', 'magna', 0.5)
+        self.summon_ranko = Summon('ranko', 'ranko', 0.5)
+        self.summon_primal = Summon('primal', 'primal', 0.5)
+        self.summon_character = Summon('character', 'character', 0.5)
+
+        self.normal_mod = self.weapon_pool.normal_modifier
+        self.magna_mod = self.weapon_pool.magna_modifier
+        self.unknown_mod = self.weapon_pool.unknown_modifier
+        self.strength_mod = self.weapon_pool.strength_modifier
+        self.bahamut_mod = self.weapon_pool.bahamut_modifier
+
         pass
     def tearDown(self):
         pass
@@ -91,21 +106,102 @@ class TestWeaponPool(unittest.TestCase):
     def test_weapon_pool_normal_mod(self):
         # 1 Normal sl 10 = 15
         # 1 normal sl 10 = 16
-        self.assertEqual(self.weapon_pool.normal_modifier, 0.31)
+        self.assertEqual(self.normal_mod, 0.31)
 
     def test_weapon_pool_magna_mod(self):
         # 4 Magna sl 10 = 4*15 = 0.60
-        self.assertEqual(self.weapon_pool.magna_modifier, 0.60)
+        self.assertEqual(self.magna_mod, 0.60)
 
     def test_weapon_pool_unknown_mod(self):
         # 1 Unknown sl 10 = .15
-        self.assertEqual(self.weapon_pool.unknown_modifier, 0.15)
+        self.assertEqual(self.unknown_mod, 0.15)
 
     def test_weapon_pool_strength_mod(self):
         # 1 strength sl 10 = .15
-        self.assertEqual(self.weapon_pool.strength_modifier, 0.15)
+        self.assertEqual(self.strength_mod, 0.15)
 
     def test_weapon_pool_bahamut_mod(self):
         # 1 bahamut sword sl 10 = .15
         # 1 hl bahamut dagger sl 10 = .30
-        self.assertEqual(self.weapon_pool.bahamut_modifier, 0.45)
+        self.assertEqual(self.bahamut_mod, 0.45)
+
+    # Test weapon_pool.calc_damage()
+    def test_weapon_pool_calc_damage_none_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_none, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    def test_weapon_pool_calc_damage_ele_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0.5)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    def test_weapon_pool_calc_damage_magna_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0.5))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    def test_weapon_pool_calc_damage_ranko_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0.5)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    # Test weapon_pool.calc_damage()
+    def test_weapon_pool_calc_damage_primal_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0.5)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    # Test weapon_pool.calc_damage()
+    def test_weapon_pool_calc_damage_character_none(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0.5) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
