@@ -81,16 +81,75 @@ class TestBahamutClass(unittest.TestCase):
 
         self.assertTrue(success)
 
-    # def test_bahamut_human(self):
-    #     human_weapons = ['dagger', 'sword']
+    def _find_bahamut_weapon_appiled_race(self, weapon_list, race):
+        multiplier_list = []
+        for weapon in weapon_list:
+            weapon.applied_race = race
+            if (weapon.multiplier != 0):
+                multiplier_list.append(weapon)
 
-    #     multiplier_list = []
+        return multiplier_list
 
-    #     for weapon in self._create_weapon_all():
-    #         if (weapon.multiplier(race=BahamutRace.human) != 0):
-    #             multiplier_list.append(weapon)
+    def test_bahamut_human(self):
+        reg_pass = ['dagger', 'sword']
+        hl_pass = ['dagger', 'gun', 'sword']
 
-    #     # Check if correct
-    #     for weapon in multiplier_list:
-    #         self.assertTrue(weapon.weapon_type in human_weapons)
+        reg_list = self._create_weapon_all()
+        reg_list = self._find_bahamut_weapon_appiled_race(reg_list, CharacterRace.human)
 
+        hl_list = self._create_hl_weapon_all()
+        hl_list = self._find_bahamut_weapon_appiled_race(hl_list, CharacterRace.human)
+
+        for weapon in reg_list:
+            self.assertTrue(weapon.weapon_type in reg_pass)
+
+        for weapon in hl_list:
+            self.assertTrue(weapon.weapon_type in hl_pass)
+
+    def test_bahamut_doraf(self):
+        reg_pass = ['axe', 'sword']
+        hl_pass = ['axe', 'spear', 'sword']
+
+        reg_list = self._create_weapon_all()
+        reg_list = self._find_bahamut_weapon_appiled_race(reg_list, CharacterRace.doraf)
+
+        hl_list = self._create_hl_weapon_all()
+        hl_list = self._find_bahamut_weapon_appiled_race(hl_list, CharacterRace.doraf)
+
+        for weapon in reg_list:
+            self.assertTrue(weapon.weapon_type in reg_pass)
+
+        for weapon in hl_list:
+            self.assertTrue(weapon.weapon_type in hl_pass)
+
+    def test_bahamut_erun(self):
+        reg_pass = ['spear', 'staff']
+        hl_pass = ['dagger', 'spear', 'staff']
+
+        reg_list = self._create_weapon_all()
+        reg_list = self._find_bahamut_weapon_appiled_race(reg_list, CharacterRace.erun)
+
+        hl_list = self._create_hl_weapon_all()
+        hl_list = self._find_bahamut_weapon_appiled_race(hl_list, CharacterRace.erun)
+
+        for weapon in reg_list:
+            self.assertTrue(weapon.weapon_type in reg_pass)
+
+        for weapon in hl_list:
+            self.assertTrue(weapon.weapon_type in hl_pass)
+
+    def test_bahamut_harvin(self):
+        reg_pass = ['gun', 'staff']
+        hl_pass = ['axe', 'gun', 'staff']
+
+        reg_list = self._create_weapon_all()
+        reg_list = self._find_bahamut_weapon_appiled_race(reg_list, CharacterRace.harvin)
+
+        hl_list = self._create_hl_weapon_all()
+        hl_list = self._find_bahamut_weapon_appiled_race(hl_list, CharacterRace.harvin)
+
+        for weapon in reg_list:
+            self.assertTrue(weapon.weapon_type in reg_pass)
+
+        for weapon in hl_list:
+            self.assertTrue(weapon.weapon_type in hl_pass)
