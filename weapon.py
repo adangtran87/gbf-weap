@@ -101,6 +101,13 @@ HL_BAHAMUT_RACE= {
     'katana': CharacterRace.doraf,
 }
 
+SL_EXTEND_MULT = {
+    WeaponSkill.none.name: 0.0,
+    WeaponSkill.small.name: 0.4,
+    WeaponSkill.medium.name: 0.5,
+    WeaponSkill.large.name: 0.6,
+}
+
 ###############################################################################
 # Weapon Abstract Class
 ###############################################################################
@@ -134,11 +141,19 @@ class WeaponNormal(WeaponBase):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
         self.weapon_skill = WEAPON_SKILL_DICT[self.weapon_skill]
+
+        if ((self.weapon_skill == WeaponSkill.medium) and
+                self.skill_level > 10):
+            raise AttributeError("Medium weapons cannot go past skill level 10")
+
         return
 
     @property
     def multiplier(self):
-        return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+        return round((( float(self.weapon_skill) +
+                        min(self.skill_level - 1, 9) +
+                        (max(0, self.skill_level - 10) * SL_EXTEND_MULT[self.weapon_skill.name])
+                      ) / 100), 3)
 
 class WeaponNormal2(WeaponBase):
     def __init__(self, **kwargs):
@@ -148,7 +163,12 @@ class WeaponNormal2(WeaponBase):
 
     @property
     def multiplier(self):
-        return (float(self.weapon_skill) + (self.skill_level - 1) + 1) / 100
+        NORM2_SL10_EXTEND_MULT = 0.8
+        return round((( float(self.weapon_skill) +
+                        min(self.skill_level - 1, 9) +
+                        1 +
+                        (max(0, self.skill_level - 10) * NORM2_SL10_EXTEND_MULT)
+                      ) / 100), 3)
 
 class WeaponMagna(WeaponBase):
     def __init__(self, **kwargs):
@@ -158,11 +178,18 @@ class WeaponMagna(WeaponBase):
 
     @property
     def multiplier(self):
-        return (float(self.weapon_skill) + (self.skill_level - 1)) / 100
+        return round((( float(self.weapon_skill) +
+                        min(self.skill_level - 1, 9) +
+                        (max(0, self.skill_level - 10) * SL_EXTEND_MULT[self.weapon_skill.name])
+                      ) / 100), 3)
 
 class WeaponUnknown(WeaponBase):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
+
+        if self.skill_level > 10:
+            raise AttributeError("Unknown weapons cannot have a skill level past 10")
+
         self.weapon_skill = WEAPON_SKILL_DICT[self.weapon_skill]
         return
 
@@ -173,6 +200,10 @@ class WeaponUnknown(WeaponBase):
 class WeaponStrength(WeaponBase):
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
+
+        if self.skill_level > 10:
+            raise AttributeError("Strength weapons cannot have a skill level past 10")
+
         self.weapon_skill = WEAPON_SKILL_DICT[self.weapon_skill]
         return
 
