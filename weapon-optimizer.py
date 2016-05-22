@@ -73,7 +73,7 @@ def parse_weapon_from_data(weapon_data):
         if (weapon_entry['weapon_class'] == "normal"):
             weapon = WeaponNormal(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "normal2"):
-            weapon = WeaponNormal2(**weapon_entry['args'])
+            weapon = WeaponNormal2(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "magna"):
             weapon = WeaponMagna(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "unknown"):
