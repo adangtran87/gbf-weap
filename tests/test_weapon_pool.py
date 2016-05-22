@@ -152,6 +152,19 @@ class TestWeaponPool(unittest.TestCase):
         pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_none)
         self.assertEqual(pool_damage, expected_damage)
 
+    def test_weapon_pool_calc_damage_ele_ele(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0.5 + 0.5)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_elemental)
+        self.assertEqual(pool_damage, expected_damage)
+
     def test_weapon_pool_calc_damage_magna_none(self):
         # All modifiers tested above so can depend on them.
         expected_damage = round(
@@ -163,6 +176,19 @@ class TestWeaponPool(unittest.TestCase):
                            2
                           )
         pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    def test_weapon_pool_calc_damage_magna_magna(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0.5+0.5))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_magna)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_ranko_none(self):
@@ -178,7 +204,19 @@ class TestWeaponPool(unittest.TestCase):
         pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_none)
         self.assertEqual(pool_damage, expected_damage)
 
-    # Test weapon_pool.calc_damage()
+    def test_weapon_pool_calc_damage_ranko_ranko(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0.5+0.5)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_ranko)
+        self.assertEqual(pool_damage, expected_damage)
+
     def test_weapon_pool_calc_damage_primal_none(self):
         # All modifiers tested above so can depend on them.
         expected_damage = round(
@@ -192,7 +230,19 @@ class TestWeaponPool(unittest.TestCase):
         pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_none)
         self.assertEqual(pool_damage, expected_damage)
 
-    # Test weapon_pool.calc_damage()
+    def test_weapon_pool_calc_damage_primal_primal(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0.5+0.5)) + self.bahamut_mod + 0) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_primal)
+        self.assertEqual(pool_damage, expected_damage)
+
     def test_weapon_pool_calc_damage_character_none(self):
         # All modifiers tested above so can depend on them.
         expected_damage = round(
@@ -204,4 +254,17 @@ class TestWeaponPool(unittest.TestCase):
                            2
                           )
         pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_none)
+        self.assertEqual(pool_damage, expected_damage)
+
+    def test_weapon_pool_calc_damage_character_character(self):
+        # All modifiers tested above so can depend on them.
+        expected_damage = round(
+                           (10000 *
+                           (1 + (self.normal_mod * (1+0)) + self.bahamut_mod + 0.5+0.5) *
+                           (1 + (self.magna_mod * (1+0))) *
+                           (1 + (self.unknown_mod * (1+0)) + self.strength_mod) *
+                           (1 + 0)),
+                           2
+                          )
+        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_character)
         self.assertEqual(pool_damage, expected_damage)
