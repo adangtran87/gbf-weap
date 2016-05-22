@@ -35,10 +35,10 @@ class WeaponPool(object):
             else:
                 self.other_list.append(weapon)
 
-        self.normal_modifier = round(self._calc_multiplier(self.normal_list),2)
-        self.magna_modifier = round(self._calc_multiplier(self.magna_list),2)
-        self.unknown_modifier = round(self._calc_multiplier(self.unknown_list),2)
-        self.strength_modifier = round(self._calc_multiplier(self.strength_list),2)
+        self.normal_modifier = round(self._calc_multiplier(self.normal_list),3)
+        self.magna_modifier = round(self._calc_multiplier(self.magna_list),3)
+        self.unknown_modifier = round(self._calc_multiplier(self.unknown_list),3)
+        self.strength_modifier = round(self._calc_multiplier(self.strength_list),3)
 
         """ Section 3.7
         For stacking rules, there is a limit on damage increase from bahamut
@@ -46,7 +46,7 @@ class WeaponPool(object):
         maximum bonus of 50% Damage and 36% Health. You can also stack a HL
         Bahamut Weapon with another Bahamut Weapon.
         """
-        self.bahamut_modifier = round(self._calc_multiplier(self.bahamut_list),2)
+        self.bahamut_modifier = round(self._calc_multiplier(self.bahamut_list),3)
         if self.bahamut_modifier > 0.5:
             self.bahamut_modifier = 0.5
 
@@ -55,7 +55,7 @@ class WeaponPool(object):
         output += "Number of weapons: {}\n".format(len(self.weapon_pool))
         for weapon in self.weapon_pool:
             output += str(weapon)
-        output += "N:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(
+        output += "N:{:.3f} M:{:.3f} U:{:.3f} S:{:.3f} B:{:.3f}\n".format(
                    self.normal_modifier,
                    self.magna_modifier,
                    self.unknown_modifier,
@@ -135,5 +135,5 @@ class WeaponPool(object):
         #Calculate total damage
         damage = 0
         damage = base_damage * magna_mod * normal_mod * unknown_mod * elemental_mod
-        return round(damage, 2)
+        return round(damage, 3)
 
