@@ -11,7 +11,7 @@ class WeaponPool(object):
 
     # Initialize with a list of 10 weapons
     def __init__(self, weapon_pool):
-        self.weapon_list= weapon_pool
+        self.weapon_pool= weapon_pool
 
         self.normal_list = []
         self.magna_list = []
@@ -19,8 +19,6 @@ class WeaponPool(object):
         self.bahamut_list = []
         self.strength_list = []
         self.other_list = []
-
-        self.base_damage = 0
 
         # Sort weapons
         for weapon in weapon_pool:
@@ -36,8 +34,6 @@ class WeaponPool(object):
                 self.bahamut_list.append(weapon)
             else:
                 self.other_list.append(weapon)
-
-            self.base_damage += weapon.damage
 
         self.normal_modifier = round(self._calc_multiplier(self.normal_list),2)
         self.magna_modifier = round(self._calc_multiplier(self.magna_list),2)
@@ -56,8 +52,8 @@ class WeaponPool(object):
 
     def __str__(self):
         output = ""
-        output += "Number of weapons: {}\n".format(len(self.weapon_list))
-        for weapon in self.weapon_list:
+        output += "Number of weapons: {}\n".format(len(self.weapon_pool))
+        for weapon in self.weapon_pool:
             output += str(weapon)
         output += "N:{:.2f} M:{:.2f} U:{:.2f} S:{:.2f} B:{:.2f}\n".format(
                    self.normal_modifier,
@@ -108,7 +104,19 @@ class WeaponPool(object):
 
         return summon_mult
 
-    def calc_damage(self, my_summon, friend_summon):
+    def calc_base_damage(self, weapon_preferences=[]):
+        total_damage = 0
+        for weapon in self.weapon_pool:
+            total_damage += weapon.damage
+        return total_damage
+
+    #return unmodified base damage
+    @property
+    def base_damage(self):
+        return self.calc_base_damage()
+
+    def calc_damage(self, my_summon, friend_summon, wep_pref=[]):
+        base_damage = self.calc_base_damage(wep_pref)
         # Calc summon multipliers
         summon_mult = self._calc_summon_multipliers([my_summon, friend_summon])
 
@@ -126,6 +134,6 @@ class WeaponPool(object):
 
         #Calculate total damage
         damage = 0
-        damage = self.base_damage * magna_mod * normal_mod * unknown_mod * elemental_mod
+        damage = base_damage * magna_mod * normal_mod * unknown_mod * elemental_mod
         return round(damage, 2)
 
