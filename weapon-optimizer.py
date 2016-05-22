@@ -25,11 +25,17 @@ class GranblueWeaponOptimizer(object):
         best_damage = 0
         best_pool = None
         count = 0
+        character_list = [self.party.mc]
 
         # Process all valid pools
         for pool in self.valid_pools:
             count = count+1
-            damage = pool.calc_damage(summon_pair[0], summon_pair[1])
+            damage = 0
+
+            # Damage aggregates damage from all characters
+            for character in character_list:
+                damage += pool.calc_damage(summon_pair[0], summon_pair[1], character)
+
             if (damage > best_damage):
                 best_damage = damage
                 best_pool = pool

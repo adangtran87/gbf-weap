@@ -104,10 +104,13 @@ class WeaponPool(object):
 
         return summon_mult
 
-    def calc_base_damage(self, weapon_preferences=[]):
+    def calc_base_damage(self, preferences=[]):
         total_damage = 0
         for weapon in self.weapon_pool:
-            total_damage += weapon.damage
+            if (weapon.weapon_type in preferences):
+                total_damage += weapon.damage * 1.2
+            else:
+                total_damage += weapon.damage
         return total_damage
 
     def isValid(self, required_list):
@@ -121,8 +124,9 @@ class WeaponPool(object):
     def base_damage(self):
         return self.calc_base_damage()
 
-    def calc_damage(self, my_summon, friend_summon, wep_pref=[]):
-        base_damage = self.calc_base_damage(wep_pref)
+    def calc_damage(self, my_summon, friend_summon, character):
+        base_damage = self.calc_base_damage(character.weapon_preferences)
+
         # Calc summon multipliers
         summon_mult = self._calc_summon_multipliers([my_summon, friend_summon])
 
