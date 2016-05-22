@@ -24,6 +24,28 @@ class OptimizationResults:
         output += str(self.pool)
         return output
 
+class GranblueWeaponOptimizer(object):
+    def __init__(self, weapon_list, summon_list):
+        if not (isinstance(weapon_list, WeaponList)):
+            raise AttributeError("weapon_list is not a weapon_list")
+        if not (isinstance(summon_list, SummonList)):
+            raise AttributeError("summon_list is not a SummonList")
+
+        self.weapon_list = weapon_list
+        self.summon_list = summon_list
+
+    def optimize(self):
+        result_list = []
+        self.combination_count = 0
+        for summon_pair in self.summon_list.summon_pairs:
+            damage, pool, count = self.weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
+            result_list.append(OptimizationResults(damage, pool, summon_pair[0], summon_pair[1]))
+            self.combination_count += count
+
+        # Sort result_list based on damage
+        result_list.sort(key=lambda x: x.damage, reverse=True)
+        return result_list
+
 #------------- Parsing ------------------------------------
 def parse_config_file(file_data):
     root, ext = os.path.splitext(file_data)
@@ -82,7 +104,6 @@ def parse_summon_from_data(summon_data):
     return SummonList(my_summons, helper_summons)
 
 #------------- Main ------------------------------------
-
 if __name__ == "__main__":
     args = get_args()
 
@@ -92,17 +113,9 @@ if __name__ == "__main__":
     summon_list = parse_summon_from_data(config_data)
 
     #Figure out best weapon pool for each summon pair
-    result_list = []
-    combination_count = 0
-    for summon_pair in summon_list.summon_pairs:
-        damage, pool, count = weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
-        result_list.append(OptimizationResults(damage, pool, summon_pair[0], summon_pair[1]))
-        combination_count += count
-
-    # Sort result_list based on damage
-    result_list.sort(key=lambda x: x.damage, reverse=True)
-
-    print ("Parsed {} weapon + summon combinations.\n".format(combination_count))
+    gwo = GranblueWeaponOptimizer(weapon_list, summon_list)
+    result_list = gwo.optimize()
+    print ("Parsed {} weapon + summon combinations.\n".format(gwo.combination_count))
 
     if (args.list_all):
         print_count = len(result_list)
