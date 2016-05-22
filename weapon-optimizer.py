@@ -40,14 +40,12 @@ FILE_PARSERS = {
 
 def get_args():
     parser = argparse.ArgumentParser()
-    parser.add_argument('weapons', metavar='weapons_file', help='Path to weapon json file')
-    parser.add_argument('summons', metavar='summons_file', help='Path to summon json file')
+    parser.add_argument('config', metavar='config_file', help='Path to config json file')
     parser.add_argument('--list_all', '-l', dest='list_all', action='store_true', help='Print all optimization results')
     return parser.parse_args()
 
-def parse_weapon_file(weapon_data):
+def parse_weapon_from_data(weapon_data):
     weapon_list = []
-    weapon_data = parse_config_file(weapon_data)
 
     for weapon_entry in weapon_data["weapon_list"]:
         if (weapon_entry['weapon_class'] == "normal"):
@@ -68,9 +66,7 @@ def parse_weapon_file(weapon_data):
 
     return WeaponList(weapon_list)
 
-def parse_summon_file(summon_data):
-    summon_data = parse_config_file(summon_data)
-
+def parse_summon_from_data(summon_data):
     #Parse my summons
     my_summons = []
     for summon_entry in summon_data['my_summons']:
@@ -90,10 +86,10 @@ def parse_summon_file(summon_data):
 if __name__ == "__main__":
     args = get_args()
 
-    print ("Parsing: {}".format(args.weapons))
-    weapon_list = parse_weapon_file(args.weapons)
-    print ("Parsing: {}".format(args.summons))
-    summon_list = parse_summon_file(args.summons)
+    print ("Parsing: {}".format(args.config))
+    config_data = parse_config_file(args.config)
+    weapon_list = parse_weapon_from_data(config_data)
+    summon_list = parse_summon_from_data(config_data)
 
     #Figure out best weapon pool for each summon pair
     result_list = []
