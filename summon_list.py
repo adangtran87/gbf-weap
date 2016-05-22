@@ -1,5 +1,3 @@
-from wep_types import SummonType, Summon
-
 class SummonList:
     def __init__(self, my_summons, helper_summons):
         self.my_summons = my_summons
