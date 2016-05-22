@@ -7,14 +7,16 @@ list of summon pairs. The script optimizes for attack/damage.
 
 `python weapon-optimizer.py fire-weapons.json fire-summons.json`
 
+### Running Unit Tests
+`python -m unittest discover tests`
+
 ### Limitations
 * Only considering 'attack' weapon skills
   * Does not consider last stand attack modifiers
 * List of weapons and summons must have weapon skills of the same element
   * Weapon and summon lists must be in json format
   * Stat sticks should have a skill type of 'none'
-* Assumes that bahamut weapon is **on race**
-  * Does **not** support sword, staff
+* Assumes character race for bahamut weapons is unknown
 * Does not take weapon preference into account
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
@@ -28,22 +30,15 @@ list of summon pairs. The script optimizes for attack/damage.
 * Should be compatible with Python 3.4 but not continuously run
 
 ### JSON enum strings
-##### Weapon Type
-* normal
-* magna
-* unknown
-* bahamut
+##### Weapon Class
+* normal, normal2, magna, unknown, strength, bahamut, stat_stick
 
-##### Weapon Skills
-* none
-* small
-* medium
-* large
+##### Weapon Type
+* sword, dagger, spear, axe, staff, gun, fist, bow, harp, katana
+
+##### Weapon Skills (normal, normal2, magna, unknown, strength)
+* none, small, medium, large
 
 ##### Summon Type
-* elemental
-* magna
-* primal
-* ranko
-* character
+* elemental, magna, primal, ranko, character
 
