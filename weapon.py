@@ -1,20 +1,13 @@
 from enum import IntEnum
 from abc import ABCMeta, abstractmethod, abstractproperty
 from utils import parse_enum_into_dict
+from character import CharacterRace
 
 class WeaponSkill(IntEnum):
     none = 0
     small = 1
     medium = 3
     large = 6
-
-# One hot encoding of race for mask selection
-class CharacterRace(IntEnum):
-    unknown = 0xF
-    human = 1
-    erun = 2
-    doraf = 4
-    harvin = 8
 
 class BahamutType(IntEnum):
     attack= 0
