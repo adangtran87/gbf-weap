@@ -110,6 +110,12 @@ class WeaponPool(object):
             total_damage += weapon.damage
         return total_damage
 
+    def isValid(self, required_list):
+        for weapon in self.weapon_pool:
+            if weapon.weapon_type in required_list:
+                return True
+        return False
+
     #return unmodified base damage
     @property
     def base_damage(self):

@@ -1,4 +1,11 @@
 {
+  "party": {
+      "main_character": {
+          "name": "Djeeta",
+          "char_class": "hawkeye",
+          "race": "unknown"
+      }
+  },
   "my_summons": [
     {
       "name": "Ifrit",

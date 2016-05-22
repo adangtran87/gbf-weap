@@ -6,6 +6,10 @@ from weapon_pool import WeaponPool
 class WeaponList:
     def __init__(self, weapon_list):
         self.weapon_list = weapon_list
+        self.all_pools = []
+        for pool in (itertools.combinations(self.weapon_list, 10)):
+            pool = WeaponPool(pool)
+            self.all_pools.append(pool)
         return
 
     def __str__(self):
@@ -15,6 +19,9 @@ class WeaponList:
             output += str(weapon)
         return output
 
-    @property
-    def all_pools(self):
-        return list(itertools.combinations(self.weapon_list, 10))
+    def get_valid_pools(self, required_weapons):
+        valid_pools = []
+        for pool in self.all_pools:
+            if pool.isValid(required_weapons):
+                valid_pools.append(pool)
+        return valid_pools
