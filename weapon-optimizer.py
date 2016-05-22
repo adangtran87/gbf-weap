@@ -3,26 +3,10 @@ import argparse
 import json
 
 from weapon import *
+from weapon_pool import WeaponPool
 from weapon_list import WeaponList
 from summon import SummonType, Summon
 from summon_list import SummonList
-
-#------------- Optimization Results -----------------------
-class OptimizationResults:
-    def __init__ (self, damage, pool, summon1, summon2):
-        self.damage = damage
-        self.pool = pool
-        self.my_summon = summon1
-        self.helper_summon = summon2
-
-    @property
-    def results(self):
-        output = ""
-        output += "** {} - {} **\n".format(self.my_summon.name, self.helper_summon.name)
-        output += "Base Damage: {}\n".format(self.pool.base_damage)
-        output += "Damage: {}\n".format(self.damage)
-        output += str(self.pool)
-        return output
 
 class GranblueWeaponOptimizer(object):
     def __init__(self, weapon_list, summon_list):
@@ -33,18 +17,58 @@ class GranblueWeaponOptimizer(object):
 
         self.weapon_list = weapon_list
         self.summon_list = summon_list
+        self.results = []
+
+    def _find_best_pool_for_summon_pair(self, summon_pair):
+        best_damage = 0
+        best_pool = None
+        count = 0
+
+        # Process all valid pools
+        for pool in self.valid_pools:
+            count = count+1
+            pool = WeaponPool(pool)
+            damage = pool.calc_damage(summon_pair[0], summon_pair[1])
+            if (damage > best_damage):
+                best_damage = damage
+                best_pool = pool
+
+        # Save off best pool and summon pair as tuple
+        self.results.append((best_damage, best_pool, summon_pair))
+        return count
 
     def optimize(self):
-        result_list = []
-        self.combination_count = 0
+        self.possible_pools_count = len(self.weapon_list.all_pools)
+        self.valid_pools_count = len(self.weapon_list.all_pools)
+        self.execution_count = 0
+
+        self.valid_pools = self.weapon_list.all_pools
+
         for summon_pair in self.summon_list.summon_pairs:
-            damage, pool, count = self.weapon_list.optimize_weapon_summon(summon_pair[0], summon_pair[1])
-            result_list.append(OptimizationResults(damage, pool, summon_pair[0], summon_pair[1]))
-            self.combination_count += count
+            self.execution_count += self._find_best_pool_for_summon_pair(summon_pair)
 
         # Sort result_list based on damage
-        result_list.sort(key=lambda x: x.damage, reverse=True)
-        return result_list
+        self.results.sort(key=lambda tup: tup[0], reverse=True)
+
+    def _print_single_result(self, damage, pool, summon_pair):
+        output = ""
+        output += "** {} - {} **\n".format(summon_pair[0].name, summon_pair[1].name)
+        output += "Base Damage: {}\n".format(pool.base_damage)
+        output += "Damage: {}\n".format(damage)
+        output += str(pool)
+        return output
+
+    def print_results(self, list_all):
+        print("Weapon Pool Combinations: {}".format(self.possible_pools_count))
+        print("Valid Pool Combinations: {}".format(self.valid_pools_count))
+        print("Number of pool damage calculations: {}".format(self.execution_count))
+        if (list_all):
+            count = 3
+        else:
+            count = len(self.results)
+        for index in range(count):
+            damage, pool, summon_pair = self.results[index]
+            print(self._print_single_result(damage, pool, summon_pair))
 
 #------------- Parsing ------------------------------------
 def parse_config_file(file_data):
@@ -114,14 +138,6 @@ if __name__ == "__main__":
 
     #Figure out best weapon pool for each summon pair
     gwo = GranblueWeaponOptimizer(weapon_list, summon_list)
-    result_list = gwo.optimize()
-    print ("Parsed {} weapon + summon combinations.\n".format(gwo.combination_count))
-
-    if (args.list_all):
-        print_count = len(result_list)
-    else:
-        print_count = 3
-
-    for opt_result in result_list[:print_count]:
-        print (opt_result.results)
+    gwo.optimize()
+    gwo.print_results(args.list_all)
 
