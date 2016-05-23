@@ -50,6 +50,12 @@ class Character(object):
 class MainCharacter(Character):
     def __init__(self, name, char_class, race):
         Character.__init__(self, name, CLASS_WEAPON_PREF[char_class], race)
+        self.char_class = char_class
+
+    def __str__(self):
+        output = ""
+        output += "{}, {}, {}, {}\n".format(self.name, self.race.name, self.char_class, self.weapon_preferences)
+        return output
 
 class Party(object):
     def __init__(self, mc, pc_list):
