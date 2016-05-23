@@ -1,6 +1,5 @@
 # gbf-weap
-This script tries to find the optimum weapon pool from a list of weapons and
-list of summon pairs. The script optimizes for attack/damage.
+This script tries to find the optimum weapon pool from a list of weapons, list of summon pairs, and party requirements. The script optimizes for attack/damage.
 
 ### How To Run
 `python weapon-optimizer.py [-h] [--list_all] config`
@@ -14,10 +13,9 @@ list of summon pairs. The script optimizes for attack/damage.
 * Only considering 'attack' weapon skills
   * Does not consider last stand attack modifiers
 * List of weapons and summons must have weapon skills of the same element
-  * Weapon and summon lists must be in json format
-  * Stat sticks should have a skill type of 'none'
-* Assumes character race for bahamut weapons is unknown
-* Does not take weapon preference into account
+* Assumes weapons are 'on element' when considering main character weapon
+  restrictions
+* Main Character classes only support Tier 3, 4, Extra classes
 * Current algorithm brute forces all weapon pool combinations
   * Beware long weapon lists; have not tested limits
 
@@ -28,6 +26,7 @@ list of summon pairs. The script optimizes for attack/damage.
 * Python 2.7
 * enum34
 * Should be compatible with Python 3.4 but not continuously run
+* `pip install -r requirements.txt`
 
 ### JSON enum strings
 ##### Weapon Class
@@ -41,4 +40,10 @@ list of summon pairs. The script optimizes for attack/damage.
 
 ##### Summon Type
 * elemental, magna, primal, ranko, character
+
+##### Main Character class
+* T3: weapon_master, holy_saber, bishop, hermit, hawkeye, dark_fencer, ogre,
+  sidewinder, superstar, valkyrie
+* T4: berserker, sage
+* Extra: alchemist, ninja, samurai, sword_master, gunslinger, mystic, assassin
 
