@@ -115,8 +115,11 @@ class WeaponPool(object):
 
     def isValid(self, required_list):
         for weapon in self.weapon_pool:
-            if weapon.weapon_type in required_list:
-                return True
+            # Dont use bahamut weapons as main weapon
+            if not (isinstance(weapon, WeaponBahamut) or
+                    isinstance(weapon, WeaponHLBahamut)):
+                if weapon.weapon_type in required_list:
+                    return True
         return False
 
     #return unmodified base damage
