@@ -4,6 +4,7 @@ import unittest
 from weapon import *
 from weapon_pool import WeaponPool
 from summon import Summon, SummonType
+from character import CharacterRace, Character
 
 class TestWeaponPool(unittest.TestCase):
     def setUp(self):
@@ -26,6 +27,8 @@ class TestWeaponPool(unittest.TestCase):
         self.unknown_mod = self.weapon_pool.unknown_modifier
         self.strength_mod = self.weapon_pool.strength_modifier
         self.bahamut_mod = self.weapon_pool.bahamut_modifier
+
+        self.character = Character("test", [], 'unknown')
 
         pass
     def tearDown(self):
@@ -136,7 +139,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_none, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_none, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_ele_none(self):
@@ -149,7 +152,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0.5)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_ele_ele(self):
@@ -162,7 +165,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0.5 + 0.5)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_elemental)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_elemental, self.summon_elemental, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_magna_none(self):
@@ -175,7 +178,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_magna_magna(self):
@@ -188,7 +191,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_magna)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_magna, self.summon_magna, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_ranko_none(self):
@@ -201,7 +204,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_ranko_ranko(self):
@@ -214,7 +217,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_ranko)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_ranko, self.summon_ranko, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_primal_none(self):
@@ -227,7 +230,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_primal_primal(self):
@@ -240,7 +243,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_primal)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_primal, self.summon_primal, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_character_none(self):
@@ -253,7 +256,7 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_none)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_none, self.character)
         self.assertEqual(pool_damage, expected_damage)
 
     def test_weapon_pool_calc_damage_character_character(self):
@@ -266,5 +269,5 @@ class TestWeaponPool(unittest.TestCase):
                            (1 + 0)),
                            2
                           )
-        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_character)
+        pool_damage = self.weapon_pool.calc_damage(self.summon_character, self.summon_character, self.character)
         self.assertEqual(pool_damage, expected_damage)

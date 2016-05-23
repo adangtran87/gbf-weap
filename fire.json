@@ -4,7 +4,24 @@
           "name": "Djeeta",
           "char_class": "hawkeye",
           "race": "unknown"
-      }
+      },
+      "party_characters": [
+          {
+              "name": "Percival",
+              "wep_pref": ["sword"],
+              "race": "human"
+          },
+          {
+              "name": "Yuel",
+              "wep_pref": ["sword"],
+              "race": "erun"
+          },
+          {
+              "name": "Zeta",
+              "wep_pref": ["spear"],
+              "race": "human"
+          }
+      ]
   },
   "my_summons": [
     {

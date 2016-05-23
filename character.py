@@ -27,13 +27,12 @@ CHARACTER_RACE_DICT = parse_enum_into_dict(CharacterRace)
 class Character(object):
     def __init__(self, name, wep_pref, race):
         self.name = name
-        self.weapon_preferences = wep_pref
+        self.weapon_preferences = str(wep_pref)
         self.race = CHARACTER_RACE_DICT[race]
 
     def __str__(self):
         output = ""
-        output += "Name: {}, Race: {}\n".format(self.name, self.race.name)
-        output += "Weapon Prefs: {}".format(self.weapon_preferences)
+        output += "{}, {}, {}\n".format(self.name, self.race.name, self.weapon_preferences)
         return output
 
 class MainCharacter(Character):
@@ -41,7 +40,15 @@ class MainCharacter(Character):
         Character.__init__(self, name, CLASS_WEAPON_PREF[char_class], race)
 
 class Party(object):
-    def __init__(self, mc):
+    def __init__(self, mc, pc_list):
         if not (isinstance(mc, MainCharacter)):
             raise AttributeError("main character class is not MainCharacter class.")
         self.mc = mc
+        self.pc_list = pc_list
+
+    def __str__(self):
+        output = ""
+        output += str(self.mc)
+        for pc in self.pc_list:
+            output += str(pc)
+        return output

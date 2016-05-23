@@ -7,7 +7,7 @@ from weapon_pool import WeaponPool
 from weapon_list import WeaponList
 from summon import SummonType, Summon
 from summon_list import SummonList
-from character import Party, MainCharacter
+from character import Party, MainCharacter, Character
 
 class GranblueWeaponOptimizer(object):
     def __init__(self, weapon_list, summon_list, party):
@@ -26,6 +26,8 @@ class GranblueWeaponOptimizer(object):
         best_pool = None
         count = 0
         character_list = [self.party.mc]
+        for party_character in self.party.pc_list:
+            character_list.append(party_character)
 
         # Process all valid pools
         for pool in self.valid_pools:
@@ -73,10 +75,10 @@ class GranblueWeaponOptimizer(object):
         print("Valid Pool Combinations: {}".format(self.valid_pools_count))
         print("Number of pool damage calculations: {}".format(self.execution_count))
         print("")
+
         # Print characters
-        print ("Party:")
-        print (party.mc)
-        print("")
+        print ("** Party **")
+        print (party)
 
         # Print results
         if (list_all):
@@ -147,8 +149,13 @@ def parse_summon_from_data(parsed_data):
 def parse_party_from_data(parsed_data):
     party_data = parsed_data['party']
     mc = MainCharacter(**party_data['main_character'])
+    pc_list = []
 
-    return Party(mc)
+    if (party_data['party_characters']):
+        for party_character in party_data['party_characters']:
+            pc_list.append(Character(**party_character))
+
+    return Party(mc, pc_list)
 
 #------------- Main ------------------------------------
 if __name__ == "__main__":
