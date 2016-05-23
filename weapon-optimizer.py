@@ -82,9 +82,10 @@ class GranblueWeaponOptimizer(object):
 
         # Print results
         if (list_all):
-            count = 3
-        else:
             count = len(self.results)
+        else:
+            count = 3
+
         for index in range(count):
             damage, pool, summon_pair = self.results[index]
             print(self._print_single_result(damage, pool, summon_pair))
