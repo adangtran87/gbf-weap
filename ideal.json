@@ -1,0 +1,186 @@
+{
+  "party": {
+      "main_character": {
+          "name": "Djeeta",
+          "char_class": "hawkeye",
+          "race": "unknown"
+      },
+      "party_characters": [
+          {
+              "name": "Percival",
+              "wep_pref": ["sword"],
+              "race": "human"
+          }
+      ]
+  },
+  "my_summons": [
+    {
+    "name": "MLB SSR Magna",
+    "type": "magna",
+    "multiplier": 1.0
+    },
+    {
+    "name": "MLB Ifrit",
+    "type": "elemental",
+    "multiplier": 0.6
+    }
+  ],
+  "helper_summons": [
+    {
+      "name": "MLB Ifrit",
+      "type": "elemental",
+      "multiplier": 0.6
+    },
+    {
+      "name": "MLB Athena",
+      "type": "elemental",
+      "multiplier": 0.8
+    },
+    {
+      "name": "MLB SSR Magna",
+      "type": "magna",
+      "multiplier": 1.0
+    },
+    {
+      "name": "MLB Agnis",
+      "type": "primal",
+      "multiplier": 1.2
+    }
+  ],
+  "weapon_list": [
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "M SSR Staff",
+      "damage": 1903,
+      "weapon_class": "magna",
+      "weapon_type": "staff",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Bahamut Sword",
+      "damage": 2000,
+      "weapon_class": "bahamut",
+      "weapon_type": "sword",
+      "skill_level": 10
+    },
+    {
+      "name": "Bahamut Dagger",
+      "damage": 2000,
+      "weapon_class": "bahamut",
+      "weapon_type": "dagger",
+      "skill_level": 10
+    },
+    {
+      "name": "Scarlet Crest Axe",
+      "damage": 2330,
+      "weapon_class": "normal",
+      "weapon_type": "axe",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Dainslief",
+      "damage": 2277,
+      "weapon_class": "normal",
+      "weapon_type": "sword",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Hauteclaire",
+      "damage": 2298,
+      "weapon_class": "normal",
+      "weapon_type": "sword",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Lohengrin",
+      "damage": 2312,
+      "weapon_class": "normal",
+      "weapon_type": "sword",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Azoth",
+      "damage": 2258,
+      "weapon_class": "normal",
+      "weapon_type": "dagger",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Florenberg",
+      "damage": 2115,
+      "weapon_class": "normal",
+      "weapon_type": "dagger",
+      "weapon_skill": "none",
+      "skill_level": 0
+    },
+    {
+      "name": "Unknown 1",
+      "damage": 2000,
+      "weapon_class": "unknown",
+      "weapon_type": "harp",
+      "weapon_skill": "large",
+      "skill_level": 10
+    },
+    {
+      "name": "Unknown 2",
+      "damage": 2000,
+      "weapon_class": "unknown",
+      "weapon_type": "sword",
+      "weapon_skill": "large",
+      "skill_level": 10
+    }
+  ]
+}
