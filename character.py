@@ -10,6 +10,7 @@ class CharacterRace(IntEnum):
     harvin = 8
 
 CLASS_WEAPON_PREF = {
+    # Tier 3
     'weapon_master': ['sword','axe'],
     'holy_saber': ['sword', 'spear'],
     'bishop': ['staff', 'spear'],
@@ -19,7 +20,18 @@ CLASS_WEAPON_PREF = {
     'ogre': ['fist'],
     'sidewinder': ['bow', 'gun'],
     'superstar': ['harp', 'dagger'],
-    'valkyrie': ['spear', 'axe']
+    'valkyrie': ['spear', 'axe'],
+    # Tier 4
+    'berserker': ['sword', 'axe'],
+    'sage': ['staff', 'spear'],
+    # Extra
+    'alchemist': ['dagger', 'gun'],
+    'ninja': ['katana', 'fist'],
+    'samurai': ['katana', 'bow'],
+    'sword_master': ['sword', 'katana'],
+    'gunslinger': ['gun'],
+    'mystic': ['staff'],
+    'assassin': ['dagger'],
 }
 
 CHARACTER_RACE_DICT = parse_enum_into_dict(CharacterRace)
