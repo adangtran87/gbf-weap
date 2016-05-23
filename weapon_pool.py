@@ -127,16 +127,53 @@ class WeaponPool(object):
     def base_damage(self):
         return self.calc_base_damage()
 
+    def _get_baha_mod(self, character):
+        bahamut_mod = 0
+        baha_30 = False
+        baha_15 = False
+
+        for baha_wep in self.bahamut_list:
+            """
+            The rules of stacking are as follows:
+
+            30% bonuses will not stack with each other.  15% bonuses will not stack
+            with each other.  15% bonuses will stack with 30% bonuses.
+
+            Therefore the most Attack and Health boost you can get from Bahamut
+            weapons is 45%.
+            """
+            baha_wep.applied_race = character.race
+            if isinstance(baha_wep, WeaponBahamut):
+                if (
+                    (baha_wep.multiplier >= 0.20) and
+                    (baha_30 == False)
+                   ):
+                    baha_30 = True
+                    bahamut_mod += baha_wep.multiplier
+                elif (
+                      (baha_wep.multiplier < 0.20) and
+                      (baha_wep.multiplier > 0) and
+                      (baha_15 == False)
+                     ):
+                    baha_15 = True
+                    bahamut_mod += baha_wep.multiplier
+            elif isinstance(baha_wep, WeaponHLBahamut):
+                bahamut_mod += baha_wep.multiplier
+            baha_wep.applied_race = CharacterRace.unknown
+
+        """
+        For stacking rules, there is a limit on damage increase from bahamut
+        weapons (50%), you can stack two HL Bahamut weapons to give a mono race
+        maximum bonus of 50% Damage and 36% Health. You can also stack a HL
+        Bahamut Weapon with another Bahamut Weapon.
+        """
+        return min(0.50, bahamut_mod)
+
     def calc_damage(self, my_summon, friend_summon, character):
         base_damage = self.calc_base_damage(character.weapon_preferences)
 
         #Recalculate bahamut multiplier with character race
-        bahamut_mod = 0
-        for baha_wep in self.bahamut_list:
-            baha_wep.applied_race = character.race
-            bahamut_mod += baha_wep.multiplier
-            # Restore so weapon pool print has multiplier value
-            baha_wep.applied_race = CharacterRace.unknown
+        bahamut_mod = self._get_baha_mod(character)
 
         # Calc summon multipliers
         summon_mult = self._calc_summon_multipliers([my_summon, friend_summon])
