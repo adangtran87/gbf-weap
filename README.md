@@ -3,9 +3,9 @@ This script tries to find the optimum weapon pool from a list of weapons and
 list of summon pairs. The script optimizes for attack/damage.
 
 ### How To Run
-`python weapon-optimizer.py [-h] [--list_all] weapons summons`
+`python weapon-optimizer.py [-h] [--list_all] config`
 
-`python weapon-optimizer.py fire-weapons.json fire-summons.json`
+`python weapon-optimizer.py fire.json`
 
 ### Running Unit Tests
 `python -m unittest discover tests`
