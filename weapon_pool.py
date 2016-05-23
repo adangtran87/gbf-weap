@@ -127,6 +127,14 @@ class WeaponPool(object):
     def calc_damage(self, my_summon, friend_summon, character):
         base_damage = self.calc_base_damage(character.weapon_preferences)
 
+        #Recalculate bahamut multiplier with character race
+        bahamut_mod = 0
+        for baha_wep in self.bahamut_list:
+            baha_wep.applied_race = character.race
+            bahamut_mod += baha_wep.multiplier
+            # Restore so weapon pool print has multiplier value
+            baha_wep.applied_race = CharacterRace.unknown
+
         # Calc summon multipliers
         summon_mult = self._calc_summon_multipliers([my_summon, friend_summon])
 
@@ -134,7 +142,7 @@ class WeaponPool(object):
         magna_mod = 1 + (self.magna_modifier * summon_mult['magna'])
 
         normal_mod = 1 + (self.normal_modifier * summon_mult['primal'])
-        normal_mod += self.bahamut_modifier
+        normal_mod += bahamut_mod
         normal_mod += summon_mult['character']
 
         unknown_mod = 1 + (self.unknown_modifier * summon_mult['ranko'])
