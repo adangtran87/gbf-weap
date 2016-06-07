@@ -122,6 +122,8 @@ def parse_weapon_from_data(parsed_data):
             weapon = WeaponMagna(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "unknown"):
             weapon = WeaponUnknown(**weapon_entry)
+        elif (weapon_entry['weapon_class'] == "strength"):
+            weapon = WeaponStrength(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "bahamut"):
             weapon = WeaponBahamut(**weapon_entry)
         elif (weapon_entry['weapon_class'] == "hl_bahamut"):
